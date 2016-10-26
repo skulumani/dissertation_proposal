@@ -1,0 +1,78 @@
+%! TEX Root = ../proposal.tex
+
+\section*{}
+\subsection*{Research Challenges}
+
+\begin{frame}{Challenges} %-----------------------------%
+
+\begin{itemize}
+    \item Optimal Trajectory Design
+        \begin{itemize}
+            \item Orbital dynamics are nonlinear and chaotic
+            \item Very sensitive to initial conditions
+            \item Intuition required by designer to enable convergence
+        \end{itemize}
+    \pause
+    \item Transfers using low-thrust propulsion
+        \begin{itemize}
+            \item Requires long periods of thrusting/coasting
+            \item Small perturbations require accurate numerical integration
+            \item Difficult to capture the long-term effects accurately
+        \end{itemize}
+    \pause
+    \item Direct Optimal Control
+        \begin{itemize}
+            \item Reformulate problem as parameter optimization
+            \item Allows for use of nonlinear programming methods
+            \item High dimensional problem and computationally intensive
+            \item Results in suboptimal solutions due to discretization
+        \end{itemize}
+\end{itemize}
+\end{frame}   %-----------------------------%
+
+\begin{frame}[t]{Problem Formulation} %-----------------------------------%
+\begin{itemize}
+    \item \Emph{Constrained attitude control} : reorient vehicle while avoiding pointing at obstacles
+    \begin{itemize}
+        \item Exclusion zones for payloads e.g infrared telescope
+        \item UAVs manuevering in congested locations
+        \item Laser/Radio emitters on spacecraft
+    \end{itemize}
+    \pause
+    \vs
+    \item Previous approaches have several issues
+    \begin{itemize}
+        \item Attitude parameterizations: singularities/ambiguities
+        \item Ad-hoc path planning: difficult to generalize to arbitrary obstacles
+        \item Randomized methods: lack of stability guarantees
+        \item Optimization based: expensive to compute and only provides open-loop control  
+    \end{itemize}
+\end{itemize}
+\end{frame} %-------------------------------------%
+
+\begin{frame}{Attitude Parameterizations}
+    \begin{itemize}
+        \item Euler Angles
+        \begin{itemize}
+            \item Minimal representation used for small attitude changes.
+            \item Singularities exist for large angle slews: requires switching between 24 sequences
+            \item Complicated trigonometric functions
+        \end{itemize}
+        \pause
+        \vs
+        \item Quaternion 
+        \begin{itemize}
+            \item No singularities
+            \item Two anti-podal quaternions for the same attitude
+            \item Unwinding behavior for control systems
+        \end{itemize}
+        \pause
+        \vs
+        \item Geometric control
+        \begin{itemize}
+            \item Globally and uniquely characterize attitude: \( R \in \SO \)
+            \item Controller is globally valid for large angle maneuvers
+        \end{itemize}
+    \end{itemize}
+    
+\end{frame}

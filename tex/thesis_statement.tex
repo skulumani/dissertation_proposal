@@ -1,0 +1,40 @@
+%! TEX ROOT = ../proposal.tex
+
+% THESIS STATEMENT
+
+\begin{frame}{Proposed Approach} % -----------------------------------%
+  \begin{itemize}
+      \item \Emph{Reachability set} on \Poincare section allows for systematic transfer design
+        \begin{itemize}
+            \item Transfer design on lower dimensional subspace
+            \item Simple method to incorporate effects of low-thrust 
+            \item Avoids the issue of determining initial conditions
+        \end{itemize}
+        \pause
+      \item Extension of previous work in planar three-body problem     
+  \end{itemize}
+
+  \note[itemize]{
+    \item Reachability set avoids the need to pick initial conditions
+    \item We compute on a lower dimensional surface
+  }
+\end{frame} %--------------------------------------%
+
+\begin{frame}{Objective} %---------------------------------------%
+
+  \begin{block}{Nonlinear Control Design}
+    Design control input \( u \) that stabilizes system from initial attitude \( R_0 \) to desired attitude \( R_d \) while avoiding obstacles
+  \end{block}
+  \pause
+  \vs
+  \begin{itemize}
+    \item Avoid drawbacks of other approaches 
+    \begin{itemize}
+      \item \Emph{Geometric control} - analysis is conducted directly on \( \SO \) 
+      \item \Emph{Barrier function} - allows for arbitrary amount of constraints
+      \item \Emph{Efficient } - real time feedback control
+      \item \Emph{Stability} - Lyapunov analysis gives rigourous stability proof
+      \item \Emph{Adaptive} - handles system uncertainties
+    \end{itemize}
+  \end{itemize}
+\end{frame}
