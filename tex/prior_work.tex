@@ -208,9 +208,29 @@ Quick summary of previous research
 
 % Differences when considering an asteroid - polyhedron model
 
-% Results from 2016 AAS
+\begin{frame}{Polyhedron Gravitation Model}
 
+\begin{itemize}
+    \item Potential is a function of only the shape model
+    \item Globally valid, closed-form expression of potential
+    \item Exact potential assumes a constant density 
+    \item Accuracy solely dependent on shape model
+\end{itemize}
+\only<2>{
+\begin{align*}\label{eq:potential}
+    U(\vecbf{r}) &= \frac{1}{2} G \sigma \sum_{e \in \text{edges}} \vecbf{r}_e \cdot \vecbf{E}_e \cdot \vecbf{r}_e \cdot L_e - \frac{1}{2}G \sigma \sum_{f \in \text{faces}} \vecbf{r}_f \cdot \vecbf{F}_f \cdot \vecbf{r}_f \cdot \omega_f 
+\end{align*}
+}
+\only<3>{
+\begin{center}
+  \animategraphics[autoplay,loop,width=0.5\textwidth]{30}{./animation/castalia/IMG}{00001}{00999}~\hfill
+  \includegraphics[width=0.5\textwidth]{figures/radius_contour.pdf}
+\end{center}
+}
 
+\end{frame}
+
+\subsection*{Asteroid transfers}
 
 \begin{frame}[t]\frametitle{Asteroid Paper}
     
@@ -219,6 +239,69 @@ Extended reachability and \Poincare to more challenging enviornment
 Gravity model is much more complex and dynamics are highly perturbed
 
 \end{frame}
+
+% Results from 2016 AAS
+\begin{frame}{Transfer Objective} %-----------------------------%
+
+\begin{itemize}
+    \item Goal is to transfer between two equatorial periodic orbits
+    \item Typical scenario during study of an asteroid
+\end{itemize}
+
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{figures/initial_transfer.pdf}
+    \hfill
+    \includegraphics[width=0.5\textwidth]{figures/initial_transfer_3d.pdf}
+\end{center}
+
+\end{frame}%-----------------------------%
+
+\begin{frame}{Simulation}
+
+
+\begin{itemize}
+    \item Generate the reachability set through discretization of \( \phi_i \)
+    \item Visualize \( \Sigma \in \R^4 \) through the use of two 2-D sections
+    \pause
+    \item Control input allows for large deviation in velocity components
+\end{itemize}
+
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{figures/poincare_xvsxdot.pdf}
+    \hfill
+    \includegraphics[width=0.5\textwidth]{figures/poincare_zvszdot.pdf}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Simulation}
+    \begin{itemize}
+        \item Four iterations of the reachable state to meet the target set
+        \item Final transfer is computed with a fixed terminal state constraint
+    \end{itemize}
+
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{figures/trajectory.pdf}
+        \hfill
+        \includegraphics[width=0.5\textwidth]{figures/trajectory_3d.pdf}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}{Complete transfer}
+\begin{itemize}
+    \item We can visualize the complete trajectory in both the body and inertial frames
+\end{itemize}
+
+\begin{center}
+  \animategraphics[autoplay,loop,width=0.5\textwidth]{30}{./animation/body/IMG}{00001}{01499}~\hfill
+  \animategraphics[autoplay,loop,width=0.5\textwidth]{30}{./animation/inertial/IMG}{00001}{01499}
+\end{center}
+
+\end{frame}
+
+\subsection*{Constrained Attitude Control}
+
 
 % Results from 2016 ACC
 
