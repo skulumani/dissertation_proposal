@@ -1,0 +1,93 @@
+%! Tex Root = ../proposal.tex
+
+% conclusion and future work slides
+
+\section*{}
+\subsection*{Conclusion}
+\begin{frame} %-----------------------------%
+\frametitle{Conclusions and Future Direction}
+  \begin{enumerate}
+    \item<+-> Developed a systematic method of designing low-thrust orbital transfer
+    \item<+-> Extension of the previous control free work on invariant manifolds
+    \item<+-> \emph{Computational geometric optimal control}: captures the long-term effects of low-thrust accurately and efficiently   
+  \end{enumerate}
+  \pause
+  Future research goals
+    \begin{itemize} 
+      \item Extension to spatial problem 
+      \item Lyapunov feedback control rather than open loop 
+      \item Incorporate attitude control/constraints 
+    \end{itemize}
+\end{frame}   %-----------------------------%
+
+% questions slide with contact info
+\begin{frame} %-------------------------------------%
+\frametitle{Questions}
+
+Feel free to contact me at \href{mailto:skulumani@gwu.edu}{skulumani@gwu.edu}
+\end{frame} %---------------------------------------%
+
+\begin{frame}{Conclusions} %-----------------------------%
+
+    \begin{itemize}
+        \item Constrained geometric adaptive controller on \( \SO \)
+        \begin{itemize}
+            \item Completely avoids singularities and ambiguities 
+            \item Geometrically exact and simple attitude controller
+            \item Satisfies multiple attitude inequality constraints 
+        \end{itemize}
+        \pause
+        \vs
+        \item Obstacle avoidance computed onboard \emph{and} in real-time
+        \begin{itemize}
+            \item Ideal for aggressive large-angle rotational manuevers
+            \item Computationally efficient and ideal for embedded systems 
+            \item Rigourous stability proof 
+        \end{itemize}
+    \end{itemize}
+
+\end{frame}   %-----------------------------%
+
+\begin{frame}[c]{Thank you}
+    \centering
+    
+    \textbf{\large Flight Dynamics \& Control Lab} \\
+    Mechanical \& Aerospace Engineering \\
+    School of Engineering \& Applied Science
+    
+    \begin{figure} %figure%
+        \includegraphics[width=0.75\textwidth]{gw_txh_2cs_pos}
+    \end{figure}
+    
+    \url{https://fdcl.seas.gwu.edu}
+\end{frame}
+
+
+\begin{frame}{Conclusions} %-----------------------------%
+\begin{itemize}
+    \item Transfer using multiple iterations of the reachability set
+    \item Alleviates the need for selecting accurate initial guesses 
+    \item Gives insight into the possible motion of the spacecraft
+    \item Extension of work in the planar three-body problem
+    \item Future research goals
+        \begin{itemize}
+            \item Apply Computational Geometric Optimal Control
+            \item Lyapunov based feedback control for orbital transfers
+        \end{itemize}
+\end{itemize}
+
+\end{frame}   %-----------------------------%
+
+\begin{frame}[c]{Thank you}
+  \centering
+  
+  \textbf{\large Flight Dynamics \& Control Lab} \\
+  Mechanical \& Aerospace Engineering \\
+  School of Engineering \& Applied Science
+  
+  \begin{figure} %figure%
+        \includegraphics[width=0.75\textwidth]{gw_txh_2cs_pos}
+    \end{figure}
+  
+  \url{https://fdcl.seas.gwu.edu}
+\end{frame}
