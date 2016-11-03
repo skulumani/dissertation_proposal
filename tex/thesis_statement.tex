@@ -5,19 +5,24 @@
 
 % THESIS STATEMENT - entire dissertation should support and defend this statement
 \begin{frame}[t]{Proposed research}
+    \begin{block}{Thesis}
+        The application of \Emph{geometric mechanics} enables the innovative design of complex trajectories around asteroids, from orbital manuevers to landing.
+    \end{block}
     \begin{itemize}
-        \item Geometric mechanics enables the novel use low-thrust propulsion for operations about asteroids
+        \item \Emph{Geometric mechanics} enables novel capabilities
         \begin{itemize}     
             \item Exploit the natural dynamics through \Poincare sections and reachability
-            \item Variational integrators for long duration accuracy
-            \item Accurate system models using \( \SE \)
-            \item Globally stable attitude controllers in the presence of obstacles
+            \item Variational integrators for long duration propogation
+            \item Accurate system model representation
+            \item Geometrically exact nonlinear controllers
         \end{itemize}
     \end{itemize}
 
 \end{frame}
 
-\begin{frame}[t]{Proposed Approach} % -----------------------------------%
+\subsection*{Research Goals}
+
+\begin{frame}[t]{Asteroid mission design} % -----------------------------------%
   \begin{itemize}
       \item \Emph{Reachability set} on \Poincare section allows for systematic transfer design
         \begin{itemize}
@@ -26,7 +31,12 @@
             \item Avoids the issue of determining initial conditions
         \end{itemize}
         \pause
-      \item Extension of previous work in planar three-body problem     
+       \item \Emph{Coupled dynamics} play a critical role when near the surface
+       \begin{itemize}
+            \item Irregular asteroid shape causes complex gravity field
+            \item Global representation of kinematics 
+            \item Autonoumous obstacle avoidance for robust landing scenarios 
+        \end{itemize}
   \end{itemize}
 
   \note[itemize]{
@@ -34,22 +44,3 @@
     \item We compute on a lower dimensional surface
   }
 \end{frame} %--------------------------------------%
-
-\begin{frame}[t]{Objective} %---------------------------------------%
-
-  \begin{block}{Nonlinear Control Design}
-    Design control input \( u \) that stabilizes system from initial attitude \( R_0 \) to desired attitude \( R_d \) while avoiding obstacles
-  \end{block}
-  \pause
-  \vs
-  \begin{itemize}
-    \item Avoid drawbacks of other approaches 
-    \begin{itemize}
-      \item \Emph{Geometric control} - analysis is conducted directly on \( \SO \) 
-      \item \Emph{Barrier function} - allows for arbitrary amount of constraints
-      \item \Emph{Efficient } - real time feedback control
-      \item \Emph{Stability} - Lyapunov analysis gives rigourous stability proof
-      \item \Emph{Adaptive} - handles system uncertainties
-    \end{itemize}
-  \end{itemize}
-\end{frame}
