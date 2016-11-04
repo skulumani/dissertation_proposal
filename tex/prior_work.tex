@@ -26,12 +26,14 @@
   }
 \end{frame} %--------------------------------------%
 
+\subsection*{Dynamic Systems Theory}
+
 \begin{frame}{\Poincare map}
 \begin{itemize}
-    \item Intersection of a periodic orbit with a lower dimensional subspace, called the \Poincare section
+    \item Intersection of a periodic orbit with a lower dimensional subspace,
     \pause
         \begin{itemize}
-            \item Can be considered a discrete map 
+            \item  \Emph{\Poincare section} - discrete map between intersections
         \end{itemize}
         \pause
     \item Useful for investigating the stability and structure 
@@ -47,20 +49,21 @@
     \Sigma = \braces{\parenth{x, \dot{x}, z, \dot{z}} | y(t_f) = 0 }
 \end{align*}
 
+{\LARGE Add image of \Poincare section}
 \end{frame}
 
 \begin{frame}{Reachability Set}
 
 \begin{itemize}
     \item Set of states achievable from a given initial condition over fixed \( t_f \) s.t. maximum control constraint
-    \begin{align*}
+    \[
         R( \vecbf{x}_0, \mathcal{U} , t_f) = \braces{ \vecbf{x}_f \subseteq \mathcal{X} | \exists \vecbf{u} \in \mathcal{U}, \vecbf{x}(t_f) = \vecbf{x}_f }
-    \end{align*}
+    \]
     \pause
     \item Directly derivable from optimal control
-    \item Frequently used for safety planning, e.g. air traffic collision avoidance
+    \item Frequently used for safety planning, e.g. air traffic avoidance
     \pause
-    \item We extend its use to the design of spacecraft transfers
+    \item Use here for design of orbital transfers
 \end{itemize}
 
 \end{frame}
