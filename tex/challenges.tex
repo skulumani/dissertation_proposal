@@ -53,15 +53,32 @@
     }
 \end{frame}
 
-\end{frame}   %-----------------------------%
+\begin{frame}
+\frametitle{Dynamic System Modelling}
+\begin{itemize}
+    \item Astrodynamics - motion of particles due to gravity
+    \item Attitude coupling is dependent on ratio \( \epsilon = \frac{l}{R} \)
+        \begin{itemize}
+            \item Typically ignored for Earth based missions 
+            \item Force depends on attitude and oment depends on position
+            \item Vastly different time scales
+        \end{itemize}
+\end{itemize}
+\begin{align*}
+    m \dot{v} &= m v \times \Omega + \sum F(b, R) \\
+    J \dot{\Omega}  &= J \Omega \times \Omega +  \sum M(b, R) 
+\end{align*}
 
-\begin{frame}[t]{System Modelling}
-    \begin{itemize}
-        \item Typically never consider attitude 
-        \item Only look at translational
-        \item Landing trajectories use optimization (MPC) or sliding mode methods
-        \item Use polar/spherical coordinates which have singularities
-    \end{itemize}
+\begin{center}
+    \includegraphics[width=0.5\textwidth,height=0.4\textheight,keepaspectratio]{figures/ISS_STS-132.jpg}
+    \quad
+    \includegraphics[width=0.5\textwidth,height=0.4\textheight,keepaspectratio]{figures/Galaxy_15_photo.jpg}
+\end{center}
+
+\note[itemize]{
+    \item Galaxy-15 is about a \SI{2}{\meter} cube, \SI{2500}{\kilo\gram}
+    \item Located in GEO at \SI{133}{\degree} W
+}
 \end{frame}
 
 \begin{frame}[t]{Landing approaches} %-----------------------------------%
