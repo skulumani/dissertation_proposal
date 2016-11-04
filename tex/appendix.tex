@@ -271,6 +271,30 @@ High exhaust speeds make electric propulsion attractive
 Much higher efficiency than chemical propulsion
 \end{frame} %----------------------------------------------------------------%
 
+% Differences when considering an asteroid - polyhedron model
+
+\begin{frame}{Polyhedron Gravitation Model}
+
+\begin{itemize}
+    \item Potential is a function of only the shape model
+    \item Globally valid, closed-form expression of potential
+    \item Exact potential assumes a constant density 
+    \item Accuracy solely dependent on shape model
+\end{itemize}
+\only<2>{
+\begin{align*}\label{eq:potential}
+    U(\vecbf{r}) &= \frac{1}{2} G \sigma \sum_{e \in \text{edges}} \vecbf{r}_e \cdot \vecbf{E}_e \cdot \vecbf{r}_e \cdot L_e - \frac{1}{2}G \sigma \sum_{f \in \text{faces}} \vecbf{r}_f \cdot \vecbf{F}_f \cdot \vecbf{r}_f \cdot \omega_f 
+\end{align*}
+}
+\only<3>{
+\begin{center}
+  \animategraphics[draft,autoplay,loop,width=0.5\textwidth]{30}{animation/2016AAS/castalia/IMG}{00001}{00999}~\hfill
+  \includegraphics[draft,width=0.5\textwidth]{figures/2016AAS/radius_contour.pdf}
+\end{center}
+}
+
+\end{frame}
+
 
 \begin{frame}{Attitude Parameterizations}
     \begin{itemize}
