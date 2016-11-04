@@ -1,0 +1,87 @@
+%\documentclass[11pt,professionalfonts,hyperref={pdftex,pdfpagemode=none,pdfstartview=FitH}]{beamer}
+%\usepackage{times}
+\documentclass[11pt,professionalfonts]{beamer}
+% \usefonttheme{serif}
+\usepackage{presentation_packages}
+
+\DeclareSIUnit\year{yr} % 2016AAS
+\newcommand{\vs}{\vspace{0.3cm}} % 2016ACC
+
+\newcommand{\hilight}[1]{\colorbox{green}{#1}}
+
+\definecolor{mygray}{gray}{0.9}
+\definecolor{RoyalBlue}{rgb}{0.25,0.41,0.88}
+\def\Emph{\textcolor{RoyalBlue}}
+
+\definecolor{tmp}{rgb}{0.804,0.941,1.0}
+\setbeamercolor{numerical}{fg=black,bg=tmp}
+\setbeamercolor{exact}{fg=black,bg=red}
+
+\mode<presentation> 
+{
+  \usetheme{Warsaw}
+  \usefonttheme{serif}
+  \setbeamercovered{transparent}
+}
+
+\setbeamertemplate{footline}%{split theme}
+{%
+  \leavevmode%
+  \hbox{\begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fill]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm]{title in head/foot}
+%    \usebeamerfont{title in head/foot}\mypaper\hfill \insertframenumber/\inserttotalframenumber
+    \usebeamerfont{title in head/foot}\hfill \insertframenumber/\inserttotalframenumber
+  \end{beamercolorbox}}%
+  \vskip0pt%
+} \setbeamercolor{box}{fg=black,bg=yellow}
+
+
+\title[Short Title]{\large\textbf{Long Title}}
+
+\author{Shankar Kulumani}
+
+%\institute{\footnotesize
+%{\normalsize Shankar Kulumani}\vspace*{0.2cm}\\
+%  Flight Dynamics and Control Lab \\ 
+%  Dept. of Mechanical and Aerospace Engineering\\ 
+%  The George Washington University \\
+%  Washington, DC\\ \vspace{10pt}
+%  June 4, 2014 \\ \vspace{10pt}
+%  }
+   
+\institute{
+  Ph.D. student\\
+  \vspace*{0.2cm}
+    \textbf{Department of Mechanical \& Aerospace Engineering}\\ \vspace*{0.5cm}
+    \includegraphics[width=0.75\textwidth]{figures/gw_txh_2cs_pos.pdf}  
+}{}
+\date{}
+
+\includeonly{
+    tex/introduction,
+    tex/thesis_statement,
+    tex/challenges}
+
+\begin{document}
+%=======================================================%
+
+\setcounter{framenumber}{-1}
+\begin{frame} %-----------------------------%
+  \titlepage
+\end{frame}   %-----------------------------%
+
+\include{tex/introduction}
+\include{tex/thesis_statement}
+\include{tex/challenges}
+\include{tex/prior_work}
+\include{tex/future_work}
+\include{tex/timeline}
+\include{tex/conclusion}
+\include{tex/backup}
+
+
+
+\end{document}
+

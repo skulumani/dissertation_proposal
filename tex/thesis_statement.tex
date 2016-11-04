@@ -1,0 +1,46 @@
+% !TEX Root = ../proposal.tex
+
+\section*{Research Description}
+\subsection*{Thesis}
+
+% THESIS STATEMENT - entire dissertation should support and defend this statement
+\begin{frame}[t]{Proposed research}
+    \begin{block}{Thesis}
+        The application of \Emph{geometric mechanics} enables the innovative design of complex trajectories around asteroids, from orbital manuevers to landing.
+    \end{block}
+    \begin{itemize}
+        \item \Emph{Geometric mechanics} enables novel capabilities
+        \begin{itemize}     
+            \item Exploit the natural dynamics through \Poincare sections and reachability
+            \item Variational integrators for long duration propogation
+            \item Accurate system model representation
+            \item Geometrically exact nonlinear controllers
+        \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+\subsection*{Research Goals}
+
+\begin{frame}[t]{Asteroid mission design} % -----------------------------------%
+  \begin{itemize}
+      \item \Emph{Reachability set} on \Poincare section allows for systematic transfer design
+        \begin{itemize}
+            \item Transfer design on lower dimensional subspace
+            \item Simple method to incorporate effects of low-thrust 
+            \item Avoids the issue of determining initial conditions
+        \end{itemize}
+        \pause
+       \item \Emph{Coupled dynamics} play a critical role when near the surface
+       \begin{itemize}
+            \item Irregular asteroid shape causes complex gravity field
+            \item Global representation of kinematics 
+            \item Autonoumous obstacle avoidance for robust landing scenarios 
+        \end{itemize}
+  \end{itemize}
+
+  \note[itemize]{
+    \item Reachability set avoids the need to pick initial conditions
+    \item We compute on a lower dimensional surface
+  }
+\end{frame} %--------------------------------------%
