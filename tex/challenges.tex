@@ -81,27 +81,22 @@
 }
 \end{frame}
 
-\begin{frame}[t]{Landing approaches} %-----------------------------------%
-Need to deal with obstacles and constraints
+
+\begin{frame}[t]{Planetary Landing} %-----------------------------------%
+\begin{center}
+    \includegraphics[width=0.5\textwidth,height=0.3\textheight,keepaspectratio]{figures/curiosity.jpg} ~
+    \includegraphics[width=0.5\textwidth,height=0.3\textheight,keepaspectratio]{figures/430_new_landingnearstill.jpg}
+\end{center}
 
 \begin{itemize}
-    \item \Emph{Constrained attitude control} : reorient vehicle while avoiding pointing at obstacles
+    \item Extensive history of manned/unmanned planetary landings
+    \item Previous approaches highly resource dependent
     \begin{itemize}
-        \item Exclusion zones for payloads e.g infrared telescope
-        \item UAVs manuevering in congested locations
-        \item Laser/Radio emitters on spacecraft
+        \item Optimization based appraoch
+        \item Extensive human planning
     \end{itemize}
-    \pause
-    \vs
-    \item Previous approaches have several issues
-    \begin{itemize}
-        \item Attitude parameterizations: singularities/ambiguities
-        \item Ad-hoc path planning: difficult to generalize to arbitrary obstacles
-        \item Randomized methods: lack of stability guarantees
-        \item Optimization based: expensive to compute and only provides open-loop control  
-    \end{itemize}
+    \item All methods not robust to obstacles/failures
 \end{itemize}
-\end{frame} %-------------------------------------%
 
 \begin{frame}{Attitude Parameterizations}
     \begin{itemize}
