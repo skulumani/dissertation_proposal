@@ -1,9 +1,9 @@
 % !TEX Root = ../proposal.tex
 
-\section*{}
-\subsection*{Research Challenges}
+\section*{Research Challenges}
+\subsection*{Previous approaches}
 
-\begin{frame}{Challenges} %-----------------------------%
+\begin{frame}{Challenges for Optimal Transfer Design} %-----------------------------%
 
 \begin{itemize}
     \item Optimal Trajectory Design
@@ -30,7 +30,46 @@
 \end{itemize}
 \end{frame}   %-----------------------------%
 
-\begin{frame}[t]{Problem Formulation} %-----------------------------------%
+\begin{frame}{Gravitational Modeling} %-----------------------------%
+
+\begin{itemize}
+  \item Asteroids are extended bodies not point masses
+  \pause
+  \item Spherical Harmonic - only valid outside of circumscribing sphere
+    {
+    \small
+    \begin{align*}
+      U(\vecbf{r} ) = \frac{\mu}{r} \sum_{n=0}^\infty \sum_{m=0}^\infty \parenth{\frac{R}{r}}^nP_{n,m}(\sin \phi) \braces{ C_{nm} \cos(m \lambda) + S_{nm} \sin(m \lambda)} 
+    \end{align*}
+    }
+    \pause
+  \item Infinite series is an approximation and adds complexity
+    \begin{itemize}
+        \item Model switching at circumscribing sphere
+        \item Coefficient matching used to ensure continuity 
+    \end{itemize}
+\end{itemize}
+
+\note[itemize]{
+  \item Models require detailed data from orbit about asteroid (OD process determines gravity field)
+  \item Simplified models (triaxial ellipsoid allows analytical insight)
+  \item Previous work fails to consider coupled dyanmics
+  }
+
+\end{frame}   %-----------------------------%
+
+\begin{frame}[t]{System Modelling}
+    \begin{itemize}
+        \item Typically never consider attitude 
+        \item Only look at translational
+        \item Landing trajectories use optimization (MPC) or sliding mode methods
+        \item Use polar/spherical coordinates which have singularities
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Landing approaches} %-----------------------------------%
+Need to deal with obstacles and constraints
+
 \begin{itemize}
     \item \Emph{Constrained attitude control} : reorient vehicle while avoiding pointing at obstacles
     \begin{itemize}
