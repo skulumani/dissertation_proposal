@@ -98,29 +98,4 @@
     \item All methods not robust to obstacles/failures
 \end{itemize}
 
-\begin{frame}{Attitude Parameterizations}
-    \begin{itemize}
-        \item Euler Angles
-        \begin{itemize}
-            \item Minimal representation used for small attitude changes.
-            \item Singularities exist for large angle slews: requires switching between 24 sequences
-            \item Complicated trigonometric functions
-        \end{itemize}
-        \pause
-        \vs
-        \item Quaternion 
-        \begin{itemize}
-            \item No singularities
-            \item Two anti-podal quaternions for the same attitude
-            \item Unwinding behavior for control systems
-        \end{itemize}
-        \pause
-        \vs
-        \item Geometric control
-        \begin{itemize}
-            \item Globally and uniquely characterize attitude: \( R \in \SO \)
-            \item Controller is globally valid for large angle maneuvers
-        \end{itemize}
-    \end{itemize}
-    
-\end{frame}
+\end{frame} %-------------------------------------%
