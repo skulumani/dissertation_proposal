@@ -1,25 +1,24 @@
 % !TEX Root = ../proposal.tex
 
-\begin{frame}{Personal Research}
+\section*{Prior Research}
+\subsection*{Reachability Set for Orbital Transfers}
 
-Mention my previous research
-
-Show how it supports and solves some of the issues mentioned in the challenges
-
-Quick summary of previous research
-\end{frame}
-
-\begin{frame}{Proposed Approach} % -----------------------------------%
-  \begin{itemize}
-      \item \Emph{Reachability set} on \Poincare section allows for systematic transfer design
+\begin{frame}{Orbital Transfers} % -----------------------------------%
+    \begin{itemize}
+        \item \Emph{Reachability set} allows for systematic transfer design
         \begin{itemize}
-            \item Transfer design on lower dimensional subspace
+            \item Transfer design on lower dimensional \Poincare surface
             \item Simple method to incorporate effects of low-thrust 
             \item Avoids the issue of determining initial conditions
         \end{itemize}
-        \pause
-      \item Extension of previous work in planar three-body problem     
-  \end{itemize}
+    \pause
+        \item Alleviates many issues with previous approaches
+        \begin{itemize}
+            \item Initial states chosen from from the reachable set
+            \item Indirect optimal control vs. direct optimal control
+            \item Reachability set gives bounds on motion
+        \end{itemize}    
+    \end{itemize}
 
   \note[itemize]{
     \item Reachability set avoids the need to pick initial conditions
@@ -27,12 +26,14 @@ Quick summary of previous research
   }
 \end{frame} %--------------------------------------%
 
+\subsection*{Dynamic Systems Theory}
+
 \begin{frame}{\Poincare map}
 \begin{itemize}
-    \item Intersection of a periodic orbit with a lower dimensional subspace, called the \Poincare section
+    \item Intersection of a periodic orbit with a lower dimensional subspace,
     \pause
         \begin{itemize}
-            \item Can be considered a discrete map 
+            \item  \Emph{\Poincare section} - discrete map between intersections
         \end{itemize}
         \pause
     \item Useful for investigating the stability and structure 
@@ -48,20 +49,21 @@ Quick summary of previous research
     \Sigma = \braces{\parenth{x, \dot{x}, z, \dot{z}} | y(t_f) = 0 }
 \end{align*}
 
+{\LARGE Add image of \Poincare section}
 \end{frame}
 
 \begin{frame}{Reachability Set}
 
 \begin{itemize}
     \item Set of states achievable from a given initial condition over fixed \( t_f \) s.t. maximum control constraint
-    \begin{align*}
+    \[
         R( \vecbf{x}_0, \mathcal{U} , t_f) = \braces{ \vecbf{x}_f \subseteq \mathcal{X} | \exists \vecbf{u} \in \mathcal{U}, \vecbf{x}(t_f) = \vecbf{x}_f }
-    \end{align*}
+    \]
     \pause
     \item Directly derivable from optimal control
-    \item Frequently used for safety planning, e.g. air traffic collision avoidance
+    \item Frequently used for safety planning, e.g. air traffic avoidance
     \pause
-    \item We extend its use to the design of spacecraft transfers
+    \item Extend to the design of orbital transfers
 \end{itemize}
 
 \end{frame}
@@ -76,8 +78,7 @@ Quick summary of previous research
     \item Control input is chosen to enlarge the reachable set
 \end{itemize}
 \pause
-\begin{figure}
-    \centering
+\begin{center}
     \begin{scaletikzpicturetowidth}{0.4\textwidth}
     \begin{tikzpicture}[scale=\tikzscale]
         \coordinate [label=left:\textcolor{black}{\large \(\vecbf{x}_0\)}] (x0) at (-1,-2);
@@ -109,63 +110,85 @@ Quick summary of previous research
         \node [draw=none] at ($ (xn) + (0,1) $) {\large \( J \)};
     \end{tikzpicture}
     \end{scaletikzpicturetowidth}
-\end{figure}
+\end{center}
 
+{\LARGE IMPROVE THIS TIKZ IMAGE}
 \end{frame} %--------------------------------------%
 
-% Intro to the reachability idea
-\begin{frame} %-----------------------------%
-\frametitle{Reachability Set}
-  \begin{itemize}
-  \item Reachable set on Poincar\'e section
-        \begin{itemize}
-            \item The set of states that can be attained from a given initial state via admissable control input
-            \item Enlarge the intersection region on the Poincar\'e section
-        \end{itemize}
-  \item \emph{Computational Geometric Optimal Control}
-    \begin{itemize}
-        \item Poincar\'e section defined by \( \alpha_d \) in \( m_1\)
-        \item Direction on Poincar\'e section defined by \( \theta_d \) in \( m_2 \)
-    \end{itemize}
- \end{itemize}
-  \begin{align*}
-    J &= -\frac{1}{2} \left( \bar{x}(N) - \bar{x}_{n}(N)\right)^T Q_f\left( \bar{x}(N) - \bar{x}_{n}(N)\right)\\
-    m_1 &= 0 = \frac{y(N) - L_{1y}}{x(N) - L_{1x}} - \tan{\alpha_d} \\ 
-    m_2&= 0 = \frac{\dot{x}(N) - \dot{x_n}(N) }{x(N) -x_n(N) } - \tan{\theta_d} \\
-     0 &\geq\bar{u}^T \bar{u} - u_{max}^2 
-    \end{align*}
+\subsection*{Optimal Control Problem}
 
-    \note[itemize]{
-        \item E-L equations are used to derive necessary conditions for optimality
-        \item Results in TPBVP and indirect optimal control
-        
-    }
-\end{frame}   %-----------------------------%
-
-% benefits of variational integrator
-
-% results from 2015 AAS
-\subsection*{Circular Restricted Three Body Problem}
-\begin{frame}[t]\frametitle{CRTBP}
-    Motion about CRTBP
-
-    Implemented variational integrator
-
-    Demonstrated use of \Poincare section and reachability
-
-
+\begin{frame}{Optimal Control Problem}
+\begin{itemize}
+    \item Reachability defined as distance between controlled and uncontrolled states
+        \[
+            J = -\frac{1}{2} \left( \vecbf{x}(t_f) - \vecbf{x}_{n}(t_f)\right)^T 
+            Q
+            \left( \vecbf{x}(t_f) - \vecbf{x}_{n}(t_f)\right) 
+        \]
+    
+    \pause
+    \item Terminal constraints - \( \vecbf{m}_i(\vecbf{x}_f) = 0\) ensures intersection with \( \Sigma \)
+    \pause
+    \item Control constraint used to emulate realistic system
+        \[
+            c(\vecbf{u}) = \vecbf{u}^T \vecbf{u} - u_m^2 \leq 0 
+        \]
+\end{itemize}
 
 \end{frame}
 
-\begin{frame}%--------------------------------------------%
-\frametitle{Transfer Problem}
+\begin{frame}{Solving the Optimal Control Problem}
+\begin{itemize}
+    \item Multiple shooting used to solve necessary conditions
+    \pause
+    \item Approximate the reachable set via \( \phi_i \) 
     \begin{itemize}
-        \item Transfer from \( L_1 \) orbit to periodic orbits near the Moon
+        \item Parameterize a direction on \( \Sigma \)
+    \end{itemize}
+    \pause
+    \item From the reachable set we chose the state which minimizes \( d \) 
+    \item Compute another reachable set if target is not feasible
+\end{itemize}
+\[
+    d = \norm{\vecbf{x}_f - \vecbf{x}_t} 
+\]
+
+{\LARGE Multiple shooting diagram}
+\end{frame}
+
+% results from 2015 AAS
+\subsection*{Transfer Examples}
+
+\begin{frame}[t]{Orbital Transfers via Reachability Sets}
+    \begin{itemize}
+        \item Numerical simulations in two different environments
+        \begin{itemize}
+            \item Planar Circular Restricted Three Body Problem
+            \item Restricted Two Body Problem 
+        \end{itemize}
+        \pause
+        \item Dynamics are related but vary in complexity
+        \begin{itemize}
+            \item Planar vs. Three Dimensional
+            \item Gravitational Potential
+            \item Both defined in a rotating reference frame
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsubsection{Three Body Problem}
+
+\begin{frame}%--------------------------------------------%
+\frametitle{Three Body Problem}
+    \begin{itemize}
+        \item Transfer from \( L_1 \) orbit to periodic orbit near the Moon
         \item Bounded control input and fixed time horizon
     \end{itemize}
-    \begin{figure}
-        \includegraphics[width=0.7\textwidth]{2015AAS/moon_orbit.pdf}
-    \end{figure}
+    \visible<2>{
+        \begin{center}
+            \includegraphics[width=0.7\textwidth,height=0.7\textheight,keepaspectratio]{2015AAS/moon_orbit.pdf}
+        \end{center}
+        }
     
     \note[itemize]{
         \item Introduce problem
@@ -175,28 +198,23 @@ Quick summary of previous research
 \end{frame} %--------------------------------------------%
 
 \begin{frame}%------------------------------------------------%
-\frametitle{Reachable Set Transfer}
-\begin{itemize}
-    \item Reachablility set generated on Poincar\'e section
-    \item<3-> Intersection point used to generate a transfer
-\end{itemize}
-    \begin{figure} 
-    \centering 
-    \begin{subfigure}[htbp]{0.5\textwidth} 
-        \only<1-2>{\includegraphics[width=\textwidth]{2015AAS/reach_trajectory}  }
-        \visible<3->{\includegraphics[width=\textwidth]{2015AAS/reach_transfer}  }
-    \end{subfigure}~
-    \begin{subfigure}[htbp]{0.5\textwidth} 
-        \visible<2->{\includegraphics[width=\textwidth]{2015AAS/poincare_compare} }
-    \end{subfigure} 
-    \end{figure}
-    
-        \visible<4->{
+    \frametitle{Reachable Set Transfer}
     \begin{itemize}
-        \item  Reachable set intersect the target 
-        \item Shorter time of flight \( t_f \approx 1.4 \)
+        \item Approximate the reachable set on the \Poincare section
+        \begin{itemize}
+            \item Generate many optimal solutions
+        \end{itemize}
+        \item<3-> Intersection point used to generate a transfer
+        \begin{itemize}
+            \item Shorter time of flight than uncontrolled dynamics
+        \end{itemize}
     \end{itemize}
-    }
+    \begin{center}
+        \only<1-2>{\includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{2015AAS/reach_trajectory}~}
+        \only<3->{\includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{2015AAS/reach_transfer}~}
+        \only<2-3>{\includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{2015AAS/poincare_compare}} 
+    \end{center}
+    
     \note[itemize]{
         \item Compare to reachable set approach
         \item Shorter time of flight
@@ -206,39 +224,27 @@ Quick summary of previous research
         }
 \end{frame} %--------------------------------------------------%
 
-% Differences when considering an asteroid - polyhedron model
+\begin{frame}{Geostationary  transfer} %----------------------------------------------------%
+    \begin{itemize}
+           \item Tranfer for geostationary orbit to a periodic orbit about \( L_1\)
+           \item Multiple iterations of reachable set required for transfer
+    \end{itemize}
 
-\begin{frame}{Polyhedron Gravitation Model}
+    \begin{center}
+       \only<1>{
+       \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2015ACTA/initial_final.pdf}~
+       \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2015ACTA/geo_transfer_full.pdf} 
+       }
 
-\begin{itemize}
-    \item Potential is a function of only the shape model
-    \item Globally valid, closed-form expression of potential
-    \item Exact potential assumes a constant density 
-    \item Accuracy solely dependent on shape model
-\end{itemize}
-\only<2>{
-\begin{align*}\label{eq:potential}
-    U(\vecbf{r}) &= \frac{1}{2} G \sigma \sum_{e \in \text{edges}} \vecbf{r}_e \cdot \vecbf{E}_e \cdot \vecbf{r}_e \cdot L_e - \frac{1}{2}G \sigma \sum_{f \in \text{faces}} \vecbf{r}_f \cdot \vecbf{F}_f \cdot \vecbf{r}_f \cdot \omega_f 
-\end{align*}
-}
-\only<3>{
-\begin{center}
-  \animategraphics[autoplay,loop,width=0.5\textwidth]{30}{animation/2016AAS/castalia/IMG}{00001}{00999}~\hfill
-  \includegraphics[width=0.5\textwidth]{figures/2016AAS/radius_contour.pdf}
-\end{center}
-}
+       \only<2>{
+       \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2015ACTA/geo_transfer_zoom.pdf}~
+       \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2015ACTA/poincare.pdf}
+       }
+    \end{center}
 
-\end{frame}
+\end{frame} %--------------------------------------------%
 
-\subsection*{Asteroid transfers}
-
-\begin{frame}[t]\frametitle{Asteroid Paper}
-    
-Extended reachability and \Poincare to more challenging enviornment 
-
-Gravity model is much more complex and dynamics are highly perturbed
-
-\end{frame}
+\subsubsection*{Asteroid transfers}
 
 % Results from 2016 AAS
 \begin{frame}{Transfer Objective} %-----------------------------%
@@ -249,15 +255,13 @@ Gravity model is much more complex and dynamics are highly perturbed
 \end{itemize}
 
 \begin{center}
-    \includegraphics[width=0.5\textwidth]{figures/2016AAS/initial_transfer.pdf}
-    \hfill
-    \includegraphics[width=0.5\textwidth]{figures/2016AAS/initial_transfer_3d.pdf}
+    \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2016AAS/initial_transfer.pdf}~
+    \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2016AAS/initial_transfer_3d.pdf}
 \end{center}
 
 \end{frame}%-----------------------------%
 
 \begin{frame}{Simulation}
-
 
 \begin{itemize}
     \item Generate the reachability set through discretization of \( \phi_i \)
@@ -267,23 +271,21 @@ Gravity model is much more complex and dynamics are highly perturbed
 \end{itemize}
 
 \begin{center}
-    \includegraphics[width=0.5\textwidth]{figures/2016AAS/poincare_xvsxdot.pdf}
-    \hfill
-    \includegraphics[width=0.5\textwidth]{figures/2016AAS/poincare_zvszdot.pdf}
+    \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2016AAS/poincare_xvsxdot.pdf}~
+    \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2016AAS/poincare_zvszdot.pdf}
 \end{center}
 
 \end{frame}
 
-\begin{frame}{Simulation}
+\begin{frame}{Transfer Simulation}
     \begin{itemize}
         \item Four iterations of the reachable state to meet the target set
         \item Final transfer is computed with a fixed terminal state constraint
     \end{itemize}
 
     \begin{center}
-        \includegraphics[width=0.5\textwidth]{figures/2016AAS/trajectory.pdf}
-        \hfill
-        \includegraphics[width=0.5\textwidth]{figures/2016AAS/trajectory_3d.pdf}
+        \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2016AAS/trajectory.pdf}~
+        \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2016AAS/trajectory_3d.pdf}
     \end{center}
 
 \end{frame}
@@ -294,137 +296,9 @@ Gravity model is much more complex and dynamics are highly perturbed
 \end{itemize}
 
 \begin{center}
-  \animategraphics[autoplay,loop,width=0.5\textwidth]{30}{animation/2016AAS/body/IMG}{00001}{01499}~\hfill
-  \animategraphics[autoplay,loop,width=0.5\textwidth]{30}{animation/2016AAS/inertial/IMG}{00001}{01499}
+  \animategraphics[draft,autoplay,loop,width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{30}{animation/2016AAS/body/IMG}{00001}{01499}~\hfill
+  \animategraphics[draft,autoplay,loop,width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{30}{animation/2016AAS/inertial/IMG}{00001}{01499}
 \end{center}
 
 \end{frame}
 
-\subsection*{Constrained Attitude Control}
-
-
-% Results from 2016 ACC
-
-\begin{frame}[t]\frametitle{Constrained Attitude Control}
-    
-geometrically exact representation of system configuration allows for global stability
-
-Attitude control in the presence of constraints
-
-\end{frame}
-
-\begin{frame}{Objective} %---------------------------------------%
-
-    \begin{block}{Nonlinear Control Design}
-        Design control input \( u \) that stabilizes system from initial attitude \( R_0 \) to desired attitude \( R_d \) while avoiding obstacles
-    \end{block}
-    \pause
-    \vs
-    \begin{itemize}
-        \item Avoid drawbacks of other approaches 
-        \begin{itemize}
-            \item \Emph{Geometric control} - analysis is conducted directly on \( \SO \) 
-            \item \Emph{Barrier function} - allows for arbitrary amount of constraints
-            \item \Emph{Efficient } - real time feedback control
-            \item \Emph{Stability} - Lyapunov analysis gives rigourous stability proof
-            \item \Emph{Adaptive} - handles system uncertainties
-        \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Configuration Error Function} %-----------------------------%
-\only<1>{
-\begin{itemize}
-    \item Error function quantifies ``distance'' to desired attitude
-    \begin{align*}
-            \Psi(R, R_d) = A(R, R_d) B(R) .
-    \end{align*}
-    \vs
-    \item Combination of attractive and repulsive terms   
-\end{itemize}
-\begin{gather*}
-    A(R, R_d) = \frac{1}{2} \tr{G \left( I - R_d^T R\right)} . \\ \\
-    B_i(R) = 1 - \frac{1}{\alpha_i} \ln \left( - \frac{ r^T R^T v_i - \cos \theta_i}{1 + \cos \theta_i}\right) .
-\end{gather*}     
-}
-
-\only<2>{
-    \begin{itemize}
-        \item Attractive well at the desired attitude
-    \end{itemize}
-    \begin{align*}
-        A(R,R_d) = \frac{1}{2} \tr{G \left( I - R_d^T R\right)} .
-    \end{align*}
-    \begin{figure} 
-        \centering
-        \includegraphics[height=0.6\textheight]{figures/2016ACC/attract_error.pdf}
-    \end{figure}
-}
-
-\only<3>{
-    \begin{itemize}
-        \item Define a barrier around obstacles
-    \end{itemize}
-    \begin{align*}
-        B_i(R) = 1 - \frac{1}{\alpha_i} \ln \left( - \frac{ r^T R^T v_i - \cos \theta_i}{1 + \cos \theta_i}\right).
-    \end{align*}
-    \begin{figure}
-        \centering
-        \includegraphics[height=0.6\textheight]{figures/2016ACC/avoid_error.pdf}
-    \end{figure}
-
-}
-
-\only<4>{
-    \begin{itemize}
-        \item Configuration error: \( \Psi : \Q \times \Q \to \R \) with control chosen to follow slope of \( \Psi \) to minimum at \( R_d\)
-    \end{itemize}
-    \begin{align*}
-        \Psi(R, R_d) = A(R,R_d) B(R) .
-    \end{align*}
-    \begin{figure}
-        \centering
-        \includegraphics[height=0.6\textheight]{figures/2016ACC/combined_error.pdf}
-    \end{figure}
-}
-\end{frame}   %-----------------------------%
-
-\begin{frame}{Numerical Simulation} %-----------------------------%
-
-\begin{itemize}
-    \item Simulate a S/C completing a yaw rotation
-    \item Single obstacle in the path of sensor
-\end{itemize}
-
-\animategraphics[autoplay,loop,width=0.5\textwidth]{8}{animation/2016ACC/single_noavoid/single_noavoid-}{0}{99}~
-\animategraphics[autoplay,loop,width=0.5\textwidth]{8}{animation/2016ACC/single_avoid/single_avoid-}{0}{99}
-
-\end{frame}%-----------------------------%
-
-\begin{frame}{Multiple obstacles}%-------------------------------------%
-
-\begin{itemize}
-    \item Easily handle multiple arbitrary constraints 
-    \begin{align*}
-        \Psi = A(R) \bracket{1 + \sum_i C_i(R)} \quad C_i = B(R) - 1
-    \end{align*}
-\end{itemize}
-
-\begin{figure}
-    \centering
-    \animategraphics[autoplay,loop,width=0.5\textwidth]{8}{animation/2016ACC/multiple_avoid/multiple_avoid-}{0}{99}
-\end{figure}
-
-\end{frame}%---------------------------------------%
-
-\subsection*{Hardware Implementation}
-
-\begin{frame}{Hexrotor Experiment} %-----------------------------%
-\begin{itemize}
-    \item Attached to spherical joint to allow only attitude dynamics
-\end{itemize}
-\begin{figure}
-    \centering
-    \href{https://youtu.be/dsmAbwQram4?t=20s}{\includegraphics[height=0.7\textheight]{figures/2016ACC/hexrotor}}
-\end{figure}
-\end{frame}   %-----------------------------%
