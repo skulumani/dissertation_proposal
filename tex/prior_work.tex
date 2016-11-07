@@ -63,7 +63,7 @@
     \item Directly derivable from optimal control
     \item Frequently used for safety planning, e.g. air traffic avoidance
     \pause
-    \item Use here for design of orbital transfers
+    \item Extend to the design of orbital transfers
 \end{itemize}
 
 \end{frame}
@@ -127,7 +127,7 @@
         \]
     
     \pause
-    \item Terminal constraints - \( \vecbf{m}_i = 0\) ensures intersection with \( \Sigma \)
+    \item Terminal constraints - \( \vecbf{m}_i(\vecbf{x}_f) = 0\) ensures intersection with \( \Sigma \)
     \pause
     \item Control constraint used to emulate realistic system
         \[
@@ -140,17 +140,18 @@
 \begin{frame}{Solving the Optimal Control Problem}
 \begin{itemize}
     \item Multiple shooting used to solve necessary conditions
-
     \pause
-    \item Approximate the reachable set via \( \phi_1, \phi_2, \phi_3 \) 
+    \item Approximate the reachable set via \( \phi_i \) 
+    \begin{itemize}
+        \item Parameterize a direction on \( \Sigma \)
+    \end{itemize}
     \pause
     \item From the reachable set we chose the state which minimizes \( d \) 
     \item Compute another reachable set if target is not feasible
 \end{itemize}
-
-\begin{align*}
-    d = \sqrt{k_x \parenth{x_f - x_t }^2 + k_z \parenth{z_f - z_t }^2 + k_{\dot{x}}\parenth{\dot{x}_f - \dot{x}_t }^2 + k_{\dot{z}}\parenth{\dot{z}_f - \dot{z}_t }^2} 
-\end{align*}
+\[
+    d = \norm{\vecbf{x}_f - \vecbf{x}_t} 
+\]
 
 {\LARGE Multiple shooting diagram}
 \end{frame}
