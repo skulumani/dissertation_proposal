@@ -179,14 +179,16 @@
 \subsubsection{Three Body Problem}
 
 \begin{frame}%--------------------------------------------%
-\frametitle{Transfer Problem}
+\frametitle{Three Body Problem}
     \begin{itemize}
-        \item Transfer from \( L_1 \) orbit to periodic orbits near the Moon
+        \item Transfer from \( L_1 \) orbit to periodic orbit near the Moon
         \item Bounded control input and fixed time horizon
     \end{itemize}
-    \begin{center}
-        \includegraphics[width=0.7\textwidth]{2015AAS/moon_orbit.pdf}
-    \end{center}
+    \visible<2>{
+        \begin{center}
+            \includegraphics[width=0.7\textwidth,height=0.7\textheight,keepaspectratio]{2015AAS/moon_orbit.pdf}
+        \end{center}
+        }
     
     \note[itemize]{
         \item Introduce problem
@@ -196,28 +198,23 @@
 \end{frame} %--------------------------------------------%
 
 \begin{frame}%------------------------------------------------%
-\frametitle{Reachable Set Transfer}
-\begin{itemize}
-    \item Reachablility set generated on Poincar\'e section
-    \item<3-> Intersection point used to generate a transfer
-\end{itemize}
-    \begin{figure}
-        \centering  
-        \begin{subfigure}[htbp]{0.5\textwidth} 
-            \only<1-2>{\includegraphics[width=\textwidth]{2015AAS/reach_trajectory}  }
-            \visible<3->{\includegraphics[width=\textwidth]{2015AAS/reach_transfer}  }
-        \end{subfigure}~
-        \begin{subfigure}[htbp]{0.5\textwidth} 
-            \visible<2->{\includegraphics[width=\textwidth]{2015AAS/poincare_compare} }
-        \end{subfigure} 
-    \end{figure}
-    
-        \visible<4->{
+    \frametitle{Reachable Set Transfer}
     \begin{itemize}
-        \item  Reachable set intersect the target 
-        \item Shorter time of flight \( t_f \approx 1.4 \)
+        \item Approximate the reachable set on the \Poincare section
+        \begin{itemize}
+            \item Generate many optimal solutions
+        \end{itemize}
+        \item<3-> Intersection point used to generate a transfer
+        \begin{itemize}
+            \item Shorter time of flight than uncontrolled dynamics
+        \end{itemize}
     \end{itemize}
-    }
+    \begin{center}
+        \only<1-2>{\includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{2015AAS/reach_trajectory}  }
+        \visible<3->{\includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{2015AAS/reach_transfer}  }
+        \visible<2->{\includegraphics[width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{2015AAS/poincare_compare} }
+    \end{center}
+    
     \note[itemize]{
         \item Compare to reachable set approach
         \item Shorter time of flight
