@@ -3,6 +3,13 @@
 \documentclass[11pt,professionalfonts]{beamer}
 % \usefonttheme{serif}
 \usepackage{presentation_packages}
+\addbibresource{library.bib}
+\ExecuteBibliographyOptions{
+  firstinits=true
+}
+\AtEveryCitekey{%
+\clearfield{url}%
+\clearfield{doi}}
 
 \DeclareSIUnit\year{yr} % 2016AAS
 \newcommand{\vs}{\vspace{0.3cm}} % 2016ACC
@@ -60,12 +67,7 @@
 \date{}
 
 \includeonly{
-    tex/introduction,
-    tex/thesis_statement,
-    tex/challenges,
-    tex/prior_work,
-    tex/future_work,
-    tex/timeline}
+    tex/conclusion}
 
 \begin{document}
 %=======================================================%
