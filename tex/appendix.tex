@@ -59,7 +59,7 @@
 \end{frame}%-------------------------------------------------------------%
 
 
-\begin{frame}[noframenumbering]{Solar Radiation Pressure} %---------------------------------------------------%
+\begin{frame}[noframenumbering,label=srp]{Solar Radiation Pressure} %---------------------------------------------------%
 
 \begin{block}{Constant Area Approximation}
 Momentum transfer from solar photons striking spacecraft
@@ -107,6 +107,8 @@ Momentum transfer from solar photons striking spacecraft
 
 
 \begin{frame}[noframenumbering]{Astrodynamics}%-------------------------------------------------------%
+\label{slide:astrodynamics}
+
 \only<1>{
 \begin{block}{Integrals of Motion}
     Require \( 6 n \) integrals of motion but know \( 10 \)
@@ -129,12 +131,12 @@ Really care about relative motion of \( m_i \) wrt \( m_q \)
 \hyperlink{sim}{\beamerreturnbutton{Go back}}
 \end{frame} %----------------------------------------------------------%
 
-
-
 \begin{frame}[noframenumbering]{Lagrange's Equations}%---------------------------------------------%
-%\begin{block}{Conservative System}
-%   All applied forces \( F_i \) are derivable from a potential function \( V(x_1, x_2, \ldots, x_{3N}) \) : \(F_i = -\deriv{V}{x_i}\)
-%\end{block}
+\label{slide:lagrange}
+\begin{block}{Conservative System}
+  All applied forces \( F_i \) are derivable from a potential function \( V(x_1, x_2, \ldots, x_{3N}) \) : \(F_i = -\deriv{V}{x_i}\)
+\end{block}
+
 \only<1>{
 \begin{block}{Hamilton's Principle}
     The actual path in configuration space followed by a holonomic system during the fixed interval \( t_0 \) to \( t_1\) is such that the action integral:
@@ -155,7 +157,8 @@ Really care about relative motion of \( m_i \) wrt \( m_q \)
 }
 \end{frame}%---------------------------------------------------------------------------%
 
-\begin{frame}[noframenumbering,label=jacobi]{Jacobi Integral}%-------------------------------------------------------------%
+\begin{frame}[noframenumbering]{Jacobi Integral}
+\label{slide:jacobi}
 \only<1>{
 \begin{block}{Total Mechanical Energy}
 \begin{enumerate}
@@ -296,8 +299,8 @@ Much higher efficiency than chemical propulsion
 
 % Differences when considering an asteroid - polyhedron model
 
-\begin{frame}{Polyhedron Gravitation Model}
-
+\begin{frame}[noframenumbering]{Polyhedron Gravitation Model}
+\label{slide:polyhedron_gravity}
 \begin{itemize}
     \item Potential is a function of only the shape model
     \item Globally valid, closed-form expression of potential
@@ -318,8 +321,22 @@ Much higher efficiency than chemical propulsion
 
 \end{frame}
 
+\begin{frame}[noframenumbering]{Attitude Kinematics}
+\label{slide:attitude_kinematics}
+\begin{itemize}
+    \item Many possible ways to represent the orientation of a rigid body
+    \item Choice depends on a variety of factors
+    \begin{itemize}
+        \item Conceptual simplicity
+        \item Computational considerations
+        \item Legacy hardware/code
+        \item Accuracy
+    \end{itemize}
+\end{itemize}
+\end{frame}
 
-\begin{frame}{Attitude Parameterizations}
+\begin{frame}[noframenumbering]{Attitude Parameterizations}
+\label{slide:attitude_parameterizations}
     \begin{itemize}
         \item Euler Angles
         \begin{itemize}
@@ -346,7 +363,8 @@ Much higher efficiency than chemical propulsion
 
 \end{frame}
 
-\begin{frame}[t]\frametitle{Constrained Attitude Control}
+\begin{frame}[t,noframenumbering]\frametitle{Constrained Attitude Control}
+\label{slide:attitude_constraints}
     \begin{itemize}
     \item \Emph{Constrained attitude control} : reorient vehicle while avoiding pointing at obstacles
     \begin{itemize}
