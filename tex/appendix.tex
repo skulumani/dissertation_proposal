@@ -1,8 +1,32 @@
 % !TEX Root = ../proposal.tex
 
 \appendix
-\section*{}
-\subsection*{Appendix}
+\section{Appendix}
+\subsection{Gravitational Modelling}
+
+\begin{frame}[noframenumbering,label=astro] %----------------------------------------------%
+\frametitle{Astrodynamics}
+
+\only<1>{
+\begin{block}{Newton's Law of Universal Gravitation}
+    Any two bodies attract one another with a force proportional to the product of their masses and invesely proportional to the square of the distance between them
+    \[
+    F = - \frac{G m_1 m_2}{ r^2} \frac{\bar{r}}{r}
+    \]
+\end{block}
+}
+\only<2>{
+\begin{block}{N-Body}
+    Gravitational attraction of \( n \) bodies acting on the particle of interest \( m_i \)
+    \[
+    m_i \ddot{\bar{r}}_i = -G \sum_{\substack{j = 1\\j\neq i}}^n \frac{m_i m_j}{r_{ji}^3} \bar{r}_{ji}
+    \]
+    Motion of \( \bar{r}_j (t) \) is not known - Not solvable in general
+    
+\end{block}
+}
+
+\end{frame} %--------------------------------------------------------------%
 
 \begin{frame}[noframenumbering,label=centrobaric]
 \frametitle{Gravitational Modeling}
@@ -36,6 +60,55 @@
     }
 \end{frame}
 
+\begin{frame}[noframenumbering]{Polyhedron Gravitation Model}
+\label{slide:polyhedron_gravity}
+\begin{itemize}
+    \item Potential is a function of only the shape model
+    \item Globally valid, closed-form expression of potential
+    \item Exact potential assumes a constant density 
+    \item Accuracy solely dependent on shape model
+\end{itemize}
+\only<2>{
+\begin{align*}\label{eq:potential}
+    U(\vecbf{r}) &= \frac{1}{2} G \sigma \sum_{e \in \text{edges}} \vecbf{r}_e \cdot \vecbf{E}_e \cdot \vecbf{r}_e \cdot L_e - \frac{1}{2}G \sigma \sum_{f \in \text{faces}} \vecbf{r}_f \cdot \vecbf{F}_f \cdot \vecbf{r}_f \cdot \omega_f 
+\end{align*}
+}
+\only<3>{
+\begin{center}
+  \animategraphics[draft,autoplay,loop,width=0.5\textwidth]{30}{animation/2016AAS/castalia/IMG}{00001}{00999}~\hfill
+  \includegraphics[draft,width=0.5\textwidth]{figures/2016AAS/radius_contour.pdf}
+\end{center}
+}
+
+\end{frame}
+
+\begin{frame}[noframenumbering]{Astrodynamics}%-------------------------------------------------------%
+\label{slide:astrodynamics}
+
+\only<1>{
+\begin{block}{Integrals of Motion}
+    Require \( 6 n \) integrals of motion but know \( 10 \)
+        \begin{itemize}
+            \item Linear Momentum - system CM constant speed - \( 6 \) constants
+            \item Angular Momentum - system angular moment - \( 3 \) constants
+            \item Total Energy - Conservative system - \( 1 \) constant
+        \end{itemize}
+    Even two-body problem is not solvable
+\end{block}
+}
+\only<2>{
+\begin{block}{Relative Motion}
+Really care about relative motion of \( m_i \) wrt \( m_q \)
+\[
+    \ddot{\bar{r}}_{qi} + G \frac{m_i + m_q}{r_{qi}^3} \bar{r}_{qi} = G \sum_{\substack{j = 1\\j\neq i,q}}^n m_j \parenth{ \frac{\bar{r}_{ij}}{r_{ij}^3} - \frac{\bar{r}_{qj}}{r_{qj}^3}} \bar{r}_{ji}
+\]
+\end{block}
+}
+
+\end{frame} %----------------------------------------------------------% 
+
+\subsection{Attitude Coupling}
+
 \begin{frame}[noframenumbering,label=grav] %---------------------------------------%
 \frametitle{Gravity Expansion}
 \only<1>{
@@ -64,7 +137,7 @@
 %\end{center}
 \end{block}
 }
-\hyperlink{potential}{\beamerreturnbutton{Go back}}
+
 \end{frame}%-------------------------------------------------------------%
 
 
@@ -90,55 +163,7 @@ Momentum transfer from solar photons striking spacecraft
 \end{itemize}
 \end{frame} %-----------------------------------------------------------%
 
-\begin{frame}[noframenumbering,label=astro] %----------------------------------------------%
-\frametitle{Astrodynamics}
-
-\only<1>{
-\begin{block}{Newton's Law of Universal Gravitation}
-    Any two bodies attract one another with a force proportional to the product of their masses and invesely proportional to the square of the distance between them
-    \[
-    F = - \frac{G m_1 m_2}{ r^2} \frac{\bar{r}}{r}
-    \]
-\end{block}
-}
-\only<2>{
-\begin{block}{N-Body}
-    Gravitational attraction of \( n \) bodies acting on the particle of interest \( m_i \)
-    \[
-    m_i \ddot{\bar{r}}_i = -G \sum_{\substack{j = 1\\j\neq i}}^n \frac{m_i m_j}{r_{ji}^3} \bar{r}_{ji}
-    \]
-    Motion of \( \bar{r}_j (t) \) is not known - Not solvable in general
-    
-\end{block}
-}
-\hyperlink{sim}{\beamerreturnbutton{Go back}}
-\end{frame} %--------------------------------------------------------------%
-
-
-\begin{frame}[noframenumbering]{Astrodynamics}%-------------------------------------------------------%
-\label{slide:astrodynamics}
-
-\only<1>{
-\begin{block}{Integrals of Motion}
-    Require \( 6 n \) integrals of motion but know \( 10 \)
-        \begin{itemize}
-            \item Linear Momentum - system CM constant speed - \( 6 \) constants
-            \item Angular Momentum - system angular moment - \( 3 \) constants
-            \item Total Energy - Conservative system - \( 1 \) constant
-        \end{itemize}
-    Even two-body problem is not solvable
-\end{block}
-}
-\only<2>{
-\begin{block}{Relative Motion}
-Really care about relative motion of \( m_i \) wrt \( m_q \)
-\[
-    \ddot{\bar{r}}_{qi} + G \frac{m_i + m_q}{r_{qi}^3} \bar{r}_{qi} = G \sum_{\substack{j = 1\\j\neq i,q}}^n m_j \parenth{ \frac{\bar{r}_{ij}}{r_{ij}^3} - \frac{\bar{r}_{qj}}{r_{qj}^3}} \bar{r}_{ji}
-\]
-\end{block}
-}
-\hyperlink{sim}{\beamerreturnbutton{Go back}}
-\end{frame} %----------------------------------------------------------%
+\subsection{Dynamics}
 
 \begin{frame}[noframenumbering]{Lagrange's Equations}%---------------------------------------------%
 \label{slide:lagrange}
@@ -191,7 +216,7 @@ Really care about relative motion of \( m_i \) wrt \( m_q \)
 \]
 \end{block}
 }
-\hyperlink{zvc}{\beamerreturnbutton{Go back}}
+
 \end{frame} %-----------------------------------------------------------%
 
 \begin{frame}[noframenumbering] %------------------------------------%
@@ -273,7 +298,7 @@ Really care about relative motion of \( m_i \) wrt \( m_q \)
     }
 \end{frame}%-----------------------------------------%
 
-\begin{frame}[noframenumbering]{Dynamics of Rigid Body} %------------------------------------------------%
+\begin{frame}[t,noframenumbering]{Dynamics of Rigid Body} %------------------------------------------------%
     \begin{block}{Newton's Law}
         
         \begin{align*}
@@ -284,7 +309,6 @@ Really care about relative motion of \( m_i \) wrt \( m_q \)
     \end{block}
     
     \begin{block}{Euler's Law}
-        
         \begin{align*}
             {M}_x &= I_{xx} \dot{\omega}_x + \parenth{I_{zz}-I_{yy}} \omega_y \omega_z \\
             {M}_y &= I_{yy} \dot{\omega}_y + \parenth{I_{xx}-I_{zz}} \omega_z \omega_x \\
@@ -301,47 +325,42 @@ Really care about relative motion of \( m_i \) wrt \( m_q \)
     \]
 \end{block}
 
-High exhaust speeds make electric propulsion attractive
-
-Much higher efficiency than chemical propulsion
+\begin{itemize}
+    \item High exhaust speeds make electric propulsion attractive
+    \item Much higher efficiency than chemical propulsion
+\end{itemize}
 \end{frame} %----------------------------------------------------------------%
 
 % Differences when considering an asteroid - polyhedron model
 
-\begin{frame}[noframenumbering]{Polyhedron Gravitation Model}
-\label{slide:polyhedron_gravity}
-\begin{itemize}
-    \item Potential is a function of only the shape model
-    \item Globally valid, closed-form expression of potential
-    \item Exact potential assumes a constant density 
-    \item Accuracy solely dependent on shape model
-\end{itemize}
-\only<2>{
-\begin{align*}\label{eq:potential}
-    U(\vecbf{r}) &= \frac{1}{2} G \sigma \sum_{e \in \text{edges}} \vecbf{r}_e \cdot \vecbf{E}_e \cdot \vecbf{r}_e \cdot L_e - \frac{1}{2}G \sigma \sum_{f \in \text{faces}} \vecbf{r}_f \cdot \vecbf{F}_f \cdot \vecbf{r}_f \cdot \omega_f 
-\end{align*}
-}
-\only<3>{
-\begin{center}
-  \animategraphics[draft,autoplay,loop,width=0.5\textwidth]{30}{animation/2016AAS/castalia/IMG}{00001}{00999}~\hfill
-  \includegraphics[draft,width=0.5\textwidth]{figures/2016AAS/radius_contour.pdf}
-\end{center}
-}
-
-\end{frame}
-
+\subsection{Attitude Kinematics}
 \begin{frame}[noframenumbering]{Attitude Kinematics}
 \label{slide:attitude_kinematics}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
 \begin{itemize}
-    \item Many possible ways to represent the orientation of a rigid body
-    \item Choice depends on a variety of factors
+    \item Many ways to represent the orientation of a rigid body
     \begin{itemize}
         \item Conceptual simplicity
         \item Computational considerations
         \item Legacy hardware/code
-        \item Accuracy
+        \item Mathmatical simplicity/convience
     \end{itemize}
 \end{itemize}
+\end{column}
+\pause
+\begin{column}{0.5\textwidth}
+    \begin{itemize}
+        \item Euler axis and angle (4)
+        \item Rotation Matrix (9)
+        \item Euler angles (3)
+        \item Quaternion (4)
+        \item Rodriguez Parameters (4)
+        \item Modified Rodriguez parameters (4)
+    \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[noframenumbering]{Attitude Parameterizations}
