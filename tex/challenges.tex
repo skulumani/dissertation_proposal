@@ -1,12 +1,12 @@
 % !TEX Root = ../proposal.tex
 
-\section*{Research Challenges}
+\section*{Challenges}
 \subsection*{Previous approaches}
 
 \begin{frame}{Challenges for Optimal Transfer Design} %-----------------------------%
 
 \begin{itemize}
-    \item Optimal Trajectory Design
+    \item Optimization in astrodynamics
         \begin{itemize}
             \item Orbital dynamics are nonlinear and chaotic
             \item Very sensitive to initial conditions
@@ -30,33 +30,11 @@
 \end{itemize}
 \end{frame}   %-----------------------------%
 
-\begin{frame}
-\frametitle{Gravitational Modeling}
-\begin{block}{Centrobaric Body}
-    \( F = -\frac{G m_1 m_2}{R^2} \hat{a}_1 \) for all particles outside of body
-\end{block}
-
-\begin{itemize}
-    \item<2-> Only applies to spherically symmetric bodies 
-    \item<3-> Unknown or possibly changing mass distributions
-    \item<4-> Can derive a \Emph{Gravity Model} using accurate tracking of SC
-\end{itemize}
-\only<4>{
-\[
-    U = \frac{\mu}{r} \sum_{n=0}^\infty \sum_{m=0}^\infty \parenth{\frac{R}{r}}^nP_{n,m}(\sin \phi) \braces{ C_{nm} \cos(m \lambda) + S_{nm} \sin(m \lambda)} 
-\]
-}
-\note[itemize]{
-    \item Models require detailed data from orbit about asteroid (OD process determines gravity field)
-    \item Simplified models (triaxial ellipsoid allows analytical insight)
-    \item Previous work fails to consider coupled dyanmics
-    }
-\end{frame}
-
-\begin{frame}
+\begin{frame}\label{slide:system_model_challenges}
 \frametitle{Dynamic System Modelling}
 \begin{itemize}
-    \item Astrodynamics - motion of particles due to gravity
+    \item Astrodynamics - motion of objects in space \hyperlink{astro}{\beamergotobutton{Intro to Astro}}
+    \pause
     \item Attitude coupling is dependent on ratio \( \epsilon = \frac{l}{R} \)
         \begin{itemize}
             \item Typically ignored for Earth based missions 
@@ -69,16 +47,22 @@
     J \dot{\Omega}  &= J \Omega \times \Omega +  \sum M(b, R) 
 \end{align*}
 
+\visible<2>{
 \begin{center}
     \includegraphics[width=0.5\textwidth,height=0.4\textheight,keepaspectratio]{figures/ISS_STS-132.jpg}
     \quad
     \includegraphics[width=0.5\textwidth,height=0.4\textheight,keepaspectratio]{figures/Galaxy_15_photo.jpg}
 \end{center}
-
+}
 \note[itemize]{
+    \item Astrodynamics vs. Celestial mechanics is the difference between the study of man-made or natural objects
+    \item Typically consider all objects as point masses - disregard rotational dynamics
+    \item In reality the translational and rotational dynamics are tightly coupled
+    \item The coupled problem greatly increases the complexity
     \item Galaxy-15 is about a \SI{2}{\meter} cube, \SI{2500}{\kilo\gram}
     \item Located in GEO at \SI{133}{\degree} W
 }
+
 \end{frame}
 
 
@@ -90,12 +74,19 @@
 
 \begin{itemize}
     \item Extensive history of manned/unmanned planetary landings
+    \pause
     \item Previous approaches highly resource dependent
     \begin{itemize}
-        \item Optimization based appraoch
-        \item Extensive human planning
+        \item Typically rely on offline optimization
+        \item Extensive human planning and analysis
     \end{itemize}
-    \item All methods not robust to obstacles/failures
 \end{itemize}
-
+\pause
+\begin{block}{Drawback of Open Loop Control}
+    \begin{itemize}
+        \item Not robust to errors in dynamic model
+        \item Unable to handle failures
+        \item Unable to react to varying obstacle or constraints
+    \end{itemize}
+\end{block}
 \end{frame} %-------------------------------------%
