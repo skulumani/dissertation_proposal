@@ -30,7 +30,7 @@
 
 \begin{frame}{\Poincare map}
 \begin{itemize}
-    \item Intersection of a periodic orbit with a lower dimensional subspace,
+    \item Intersection of a periodic orbit with a lower dimensional subspace
     \pause
         \begin{itemize}
             \item  \Emph{\Poincare section} - discrete map between intersections
@@ -45,11 +45,44 @@
         \end{itemize}
 \end{itemize}
 
-\begin{align*}
-    \Sigma = \braces{\parenth{x, \dot{x}, z, \dot{z}} | y(t_f) = 0 }
-\end{align*}
+\begin{center}
+    \begin{scaletikzpicturetowidth}{0.3\textwidth}
+    \begin{tikzpicture}[tdplot_main_coords,
+          poincare/.style={opacity=.2,very thick,fill=blue},
+          orbit/.style={very thick,black},
+          orbit hidden/.style={very thick,dashed},
+          grid/.style={very thin,gray!50},
+          axis/.style={->,blue,thick},scale=0.6]
 
-{\LARGE Add image of \Poincare section}
+        % nodes for the poincare section
+        \node[label=above:\(\Sigma\)] (upper_right) at (0,5,5) {};
+        \node[] (upper_left) at (0,1,5) {};
+        \node[] (lower_left) at (0,1,0) {};
+        \node[] (lower_right) at (0,5,0) {};
+
+        % draw poincare section
+        \draw[poincare] (upper_right.center) -- (upper_left.center) -- (lower_left.center) -- (lower_right.center) -- (upper_right.center);
+
+        \pause
+        % draw a periodic orbit
+        \coordinate (center) at (0,0,2);
+        \node[above left] (x0) at (0,2,2) {\(\vecbf{x}_0\)};
+        \filldraw (0,2,2) circle (3pt);
+
+        \tdplotdrawarc[orbit hidden]{(center)}{2}{90}{190}{}{};
+        \tdplotdrawarc[orbit,<-]{(center)}{2}{-170}{90}{}{};
+
+        \pause
+        \node[below right] (x1) at (0,3,2) {\(\vecbf{x}_1\)};
+        \filldraw (0,3,2) circle (3pt);
+
+        \tdplotdrawarc[orbit hidden]{(center)}{3}{90}{199}{}{};
+        \tdplotdrawarc[orbit,<-]{(center)}{3}{-161}{90}{}{};
+
+    \end{tikzpicture}
+    \end{scaletikzpicturetowidth}
+\end{center}
+
 \end{frame}
 
 \begin{frame}{Reachability Set}
