@@ -159,7 +159,7 @@
         \]
     
     \pause
-    \item Terminal constraints - \( \vecbf{m}_i(\vecbf{x}_f) = 0\) ensures intersection with \( \Sigma \)
+    \item Terminal constraints - \( \vecbf{m}_i(\vecbf{x}_f) = 0\) ensures \( \Sigma \) intersection
     \pause
     \item Control constraint used to emulate realistic system
         \[
@@ -171,7 +171,9 @@
 
 \begin{frame}{Shooting Method}
 \begin{itemize}
-    \item Multiple Shooting used to deal with convergence issues
+    \item Shooting method used to solve two-point boundary value problem
+    \item Convergence and numerical stability is difficult over long time horizons
+    \item Multiple shooting sub-divides the interval into shorter segments
 \end{itemize}
 
 \only<1>{
