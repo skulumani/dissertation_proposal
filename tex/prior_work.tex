@@ -215,34 +215,45 @@
     \item Multiple shooting sub-divides the interval into shorter segments
 \end{itemize}
 
-\only<1>{
+\only<2-5>{
 \begin{scaletikzpicturetowidth}{\textwidth}
     \begin{tikzpicture}[scale=\tikzscale]
-        % \draw[help lines] (0,0) grid (20,5) ; %grid
+        \onslide<2->{
+            \node[label=west:\(\vecbf{x}\)] (x0m) at (0,5) {};
+            \node[] (xnm) at (20,5) {};
+    
+            \node[label=below:\(t_0\)] (t0) at (0,0) {};
+            \node[label=below:\(t_f\)] (tf) at (20,0) {};
 
-        \node[label=west:\(\vecbf{x}\)] (x0m) at (0,5) {};
-        \node[] (xnm) at (20,5) {};
+            \draw [<->,thick] (tf.center) -- (t0.center) -- (x0m.center);
 
-        \node[label=below:\(t_0\)] (t0) at (0,0) {};
-        \node[label=below:\(t_f\)] (tf) at (20,0) {};
+            % nodes for each subsegment
+            \node[label=left:\(\vecbf{x}_0\)] (x0) at (0,1) {\pgfuseplotmark{*}};
+            \node[label=below left:\(\vecbf{\lambda}_0\)] at (x0) {};
+            \node[label=right:\(\vecbf{x}_f\)] (xnminus) at (20,3) {\pgfuseplotmark{*}};
+            \node[label=below right:\(\vecbf{\lambda}_f\)] at (xnminus) {};
+        }
 
-        % nodes for each subsegment
-        \node[label=left:\(\vecbf{x}_0\)] (x0) at (0,1) {\pgfuseplotmark{*}};
-        \node[label=right:\(\vecbf{x}_n\)] (xnminus) at (20,3) {\pgfuseplotmark{*}};
-        % draw axes
-        \draw [<->,thick] (tf.center) -- (t0.center) -- (x0m.center);
 
-        % draw the subsegments
-        \draw [->] (x0.center) to [bend left=20] (xnminus.center);
-
+        % shooting attempts
+        \onslide<3->{
+            \draw [->,dashed] (x0.center) to [bend left=20] ($ (xnminus.center)+(0,1) $);
+        }
+        \onslide<4->{
+            \draw [->,dashed] (x0.center) to [bend right=10] ($ (xnminus.center)+(0,-1) $);
+        }
+        % final correct shooting path
+        \onslide<5->{
+            \draw [->] (x0.center) to [bend left=10] (xnminus.center);
+        }
     \end{tikzpicture}
 \end{scaletikzpicturetowidth}
 }
-\only<2>{
-    \begin{scaletikzpicturetowidth}{\textwidth}
+
+\only<6->{
+\begin{scaletikzpicturetowidth}{\textwidth}
         \begin{tikzpicture}[scale=\tikzscale]
     % \draw[help lines] (0,0) grid (20,5) ; %grid
-
     \node[label=west:\(\vecbf{x}\)] (x0m) at (0,5) {};
     \node[] (x1m) at (5,5) {};
     \node[] (x2m) at (10,5) {};
@@ -250,45 +261,66 @@
     \node[] (xnm) at (20,5) {};
 
     \node[label=below:\(t_0\)] (t0) at (0,0) {};
-    \node[label=below:\(t_1\)] (t1) at (5,0) {};
-    \node[label=below:\(t_2\)] (t2) at (10,0) {};
-    \node[label=below:\(t_{n-1}\)] (t3) at (15,0) {};
     \node[label=below:\(t_n\)] (tn) at (20,0) {};
 
     % nodes for each subsegment
     \node[label=left:\(\vecbf{x}_0\)] (x0) at (0,1) {\pgfuseplotmark{*}};
-
-    \node[label=right:\(\vecbf{x}_1^{-}\)] (x1minus) at (5,2) {\pgfuseplotmark{*}};
-    \node[label={135:\(\vecbf{x}_1^{+}\)}] (x1plus) at (5,3) {\pgfuseplotmark{o}};
-
-    \node[label=right:\(\vecbf{x}_2^{-}\)] (x2minus) at (10,2) {\pgfuseplotmark{*}};
-    \node[label={135:\(\vecbf{x}_2^{+}\)}] (x2plus) at (10,3) {\pgfuseplotmark{o}};
-
-    \node[label=right:\(\vecbf{x}_{n-1}^{-}\)] (x3minus) at (15,2) {\pgfuseplotmark{*}};
-    \node[label={135:\(\vecbf{x}_{n-1}^{+}\)}] (x3plus) at (15,3) {\pgfuseplotmark{o}};
+    \node[label=below left:\(\vecbf{\lambda}_0\)] at (x0) {};
 
     \node[label=right:\(\vecbf{x}_n\)] (xnminus) at (20,3) {\pgfuseplotmark{*}};
+    \node[label=below right:\(\vecbf{\lambda}_n\)] at (xnminus) {};
+
     % draw axes
     \draw [<->,thick] (tn.center) -- (t0.center) -- (x0m.center);
 
-    % draw segement dividers
-    \draw [dashed,thick] (t1.center) -- (x1m.center);
-    \draw [dashed,thick] (t2.center) -- (x2m.center);
-    \draw [dashed,thick] (t3.center) -- (x3m.center);
-    \draw [dashed,thick] (tn.center) -- (xnm.center);
 
-    % draw markers at each subsegment
+    \onslide<7->{
+        
+        \node[label=below:\(t_1\)] (t1) at (5,0) {};
+        \node[label=below:\(t_2\)] (t2) at (10,0) {};
+        \node[label=below:\(t_{n-1}\)] (t3) at (15,0) {};
+        
+                \node[label=right:\(\vecbf{x}_1^{-}\)] (x1minus) at (5,2) {\pgfuseplotmark{*}};
+        \node[label={135:\(\vecbf{x}_1^{+}\)}] (x1plus) at (5,3) {\pgfuseplotmark{o}};
 
-    % draw the subsegments
-    \draw [->] (x0.center) to [bend left=30] (x1minus.center);
-    \draw [->] (x1plus.center) to [bend left=30] (x2minus.center);
-    % dotted lines here
-    \draw[decorate sep={2mm}{10mm},fill] (x2plus.east) to [bend left=30] (x3minus.west);
+                \node[label=right:\(\vecbf{x}_2^{-}\)] (x2minus) at (10,2) {\pgfuseplotmark{*}};
+        \node[label={135:\(\vecbf{x}_2^{+}\)}] (x2plus) at (10,3) {\pgfuseplotmark{o}};
 
-    \draw [->] (x3plus.center) to [bend left=30] (xnminus.center);
+                \node[label=right:\(\vecbf{x}_{n-1}^{-}\)] (x3minus) at (15,2) {\pgfuseplotmark{*}};
+        \node[label={135:\(\vecbf{x}_{n-1}^{+}\)}] (x3plus) at (15,3) {\pgfuseplotmark{o}};
+        % draw segement dividers
+        \draw [dashed,thick] (t1.center) -- (x1m.center);
+        \draw [dashed,thick] (t2.center) -- (x2m.center);
+        \draw [dashed,thick] (t3.center) -- (x3m.center);
+        \draw [dashed,thick] (tn.center) -- (xnm.center);
+    }
+
+    \onslide<8->{
+
+        \draw [->] (x0.center) to [bend left=30] (x1minus.center);
+    }
+
+    \onslide<9->{
+
+        \draw [->] (x1plus.center) to [bend left=30] (x2minus.center);
+    }
+
+    \onslide<10->{
+        % dotted lines here
+
+        \draw[decorate sep={2mm}{10mm},fill] (x2plus.east) to [bend left=30] (x3minus.west);
+    }
+
+    \onslide<11->{
+
+        \draw [->] (x3plus.center) to [bend left=30] (xnminus.center);
+    }
+
+
 \end{tikzpicture}
-    \end{scaletikzpicturetowidth}
+\end{scaletikzpicturetowidth}
 }
+
 \end{frame}
 
 \begin{frame}{Solving the Optimal Control Problem}
