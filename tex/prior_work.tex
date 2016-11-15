@@ -21,6 +21,7 @@
     \end{itemize}
 
   \note[itemize]{
+    \item here we introduce some of our previous work that aims to apply geometric mechanics to the design of trajectories around asteroids
     \item Reachability set avoids the need to pick initial conditions
     \item We compute on a lower dimensional surface
   }
@@ -91,6 +92,13 @@
     \end{scaletikzpicturetowidth}
 \end{center}
 
+\note[itemize]{
+    \item Here we present a review of the key components of dynamical systems theory
+    \item we start with some initial condition \( \vecbf{x}_0\) on a periodic orbit
+    \item we then define a section \( \Sigma \) transverse to this flow
+    \item we can use the successive iterations of these periodic orbits to study the dynamics of the system on a lower dimensional surface.
+    \item Periodic orbits show up as fixed points while sinks/sources will have a distinctly different behavior
+}
 \end{frame}
 
 \begin{frame}{Reachability Set}
@@ -107,6 +115,10 @@
     \item Extend to the design of orbital transfers
 \end{itemize}
 
+\note[itemize]{
+    \item Given the state of an aircraft, we can predict where it can end up over a fixed amount of time.
+    \item To avoid any possibility of collision, we want to make sure these sets do not intersect
+}
 \end{frame}
 
 \begin{frame}{Reachability Set on \Poincare section} % -----------------------------------%
@@ -165,25 +177,33 @@
         \tdplotdrawarc[tdplot_rotated_coords,grid]{(x0)}{0.5}{-45}{90}{above}{\(\phi\)};
         }
 
-    % draw terminal state on reachability set
+
+   % draw terminal state on reachability set
     \onslide<6->{
         \node[tdplot_rotated_coords,label=above:\(\vecbf{x}_f\)] (xf) at ($ (x0)+(-45:1.5) $) {};
         \filldraw (xf) circle (3pt);
-        \node[label=below:\(\vecbf{x}_n\)] at (x0) {};
         }
-    
+
     \onslide<7->{
         \node[tdplot_rotated_coords,label=below:\(J\)] at (xf) {};
         }
 
     \onslide<8->{
-        
         \tdplotdrawarc[tdplot_rotated_coords,reachability]{(x0)}{1.5}{0}{360}{}{};
     }
     
 \end{tikzpicture}
 \end{center}
 
+\note[itemize]{
+    \item We combine both reachability and the \Poincare section to design transfers
+    \item again we define our section \( \Sigma\)
+    \item choose an initial state that is on \( \Sigma \)
+    \item propogate without any control input from \( \vecbf{x}_0 \) to \( \vecbf{x}_n\)
+    \item by adding the control input the terminal state will be something different at \( \vecbf{x}_f\)
+    \item we define the distance between \( \vecbf{x}_n\) and \(\vecbf{x}_f\) with \( J \) - want to maximize this
+    \item Repeat this computation many times for a variety of angles \( \phi\)
+}
 \end{frame} %--------------------------------------%
 
 \subsection[Formulating the optimal control problem]{Optimal Control Problem}
@@ -206,6 +226,9 @@
         \]
 \end{itemize}
 
+\note[itemize]{
+    \item Formulate the reachability in terms of an optimal control problem
+}
 \end{frame}
 
 \begin{frame}{Shooting Method}
@@ -320,7 +343,14 @@
 \end{tikzpicture}
 \end{scaletikzpicturetowidth}
 }
-
+\note[itemize]{
+    \item The euler lagrange equations transforms from an optimal control problem to a two point boundary value problem
+    \item in the shooting method we try to choose initial conditions \( \vecbf{\lambda}_0\) to satisfy some set of terminal conditions
+    \item Again it's prone to sensitivty so we instead use a multiple shooting method 
+    \item We divide the time interval into smaller sub segments and add additional interior constraints to ensure a continuous trajectory
+    \item Each sub stage is then a smaller single shooting approach
+    \item this ends up reducing the sensitivity of the terminal states to variations of the intial conditions
+}
 \end{frame}
 
 \begin{frame}{Solving the Optimal Control Problem}
@@ -360,6 +390,10 @@
             \item Both defined in a rotating reference frame
         \end{itemize}
     \end{itemize}
+
+\note[itemize]{
+    \item here we show some examples of using this approach to design transfers in two different dynamic enviornments
+}
 \end{frame}
 
 \subsubsection[Circular Restricted Three Body Problem]{Three Body Problem}
@@ -377,7 +411,8 @@
         }
     
     \note[itemize]{
-        \item Introduce problem
+        \item Introduce problem and initial and terminal orbits. 
+        \item Earth is way off to the left with the Moon at the center
         \item Possible use as a communication array
         \item Might actually be a distant retrograde orbit
         }
@@ -428,6 +463,9 @@
        }
     \end{center}
 
+\note[itemize]{
+    \item The green trajectories are the invariant manifolds and require no control input to traverse large regions of the phase space
+}
 \end{frame} %--------------------------------------------%
 
 \subsubsection[Transfers about 4769 Castalia]{Asteroid transfers}
@@ -445,6 +483,9 @@
     \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2016AAS/initial_transfer_3d.pdf}
 \end{center}
 
+\note[itemize]{
+    \item Now we apply the same methodology to transfers about asteroids
+}
 \end{frame}%-----------------------------%
 
 \begin{frame}{Simulation}
@@ -461,6 +502,10 @@
     \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2016AAS/poincare_zvszdot.pdf}
 \end{center}
 
+\note[itemize]{
+    \item This \( \Sigma \) is different than before because we're no longer dealing with a planar orbit
+    \item We visualize \( \R^4\) using two two-dimensional plots
+}
 \end{frame}
 
 \begin{frame}{Transfer Simulation}
@@ -486,6 +531,9 @@
   \animategraphics[controls,autoplay,loop,width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{30}{animation/2016AAS/inertial/IMG}{00001}{01499}
 \end{center}
 
+\note[itemize]{
+    \item we have the body frame on the left and the inertial frame on the right
+}
 \end{frame}
 
 \subsection[Autonomous Spacecraft attitude control with obstacles]{Constrained Attitude Control}
@@ -513,6 +561,10 @@
     \item Hard cone constraint: \( r^T R^T v \leq \cos \theta \)
     
 \end{itemize}
+
+\note[itemize]{
+    \item Obstacle described as a cone around the direction of avoidance
+}
 \end{frame}   %-----------------------------%
 
 \begin{frame}{Control Objective} %---------------------------------------%
@@ -585,6 +637,10 @@
     \begin{center}
         \includegraphics[height=0.6\textheight]{figures/2016ACC/combined_error.pdf}
     \end{center}
+}
+
+\note[itemize]{
+    \item First step in control design is the selection of an error function
 }
 \end{frame}   %-----------------------------%
 
