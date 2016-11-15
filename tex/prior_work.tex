@@ -133,7 +133,7 @@
       poincare/.style={opacity=.2,very thick,fill=blue},
       orbit/.style={very thick,black},
       orbit hidden/.style={very thick,dashed},
-      grid/.style={very thin,gray},
+      grid/.style={very thin,black},
       axis/.style={->,blue,thick},
       reachability/.style={thick,blue}]
 
@@ -157,9 +157,13 @@
     % draw a periodic orbit
     \coordinate (center) at (0,0,2);
     \node[] (x0) at (0,3,2) {};
-    \onslide<3-5>{
+    \onslide<3>{
         \node[label=left:\(\vecbf{x}_0\)] at (x0) {};
+        
+    }
+    \onslide<4->{
         \filldraw (x0) circle (3pt);
+        \node[label=below:\(\vecbf{x}_n\)] at (x0) {};
     }
 
     \onslide<4-5>{
