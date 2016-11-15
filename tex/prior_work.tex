@@ -237,9 +237,9 @@
 
 \begin{frame}{Shooting Method}
 \begin{itemize}
-    \item Shooting method used to solve two-point boundary value problem
-    \item Convergence and numerical stability is difficult over long time horizons
-    \item Multiple shooting sub-divides the interval into shorter segments
+    \item Shooting method used to solve boundary value problem
+    \item Convergence is difficult with with single shooting
+    \item<6-> Multiple shooting sub-divides the total interval
 \end{itemize}
 
 \only<2-5>{
@@ -446,12 +446,13 @@
         \item Multiple shooting to solve TPBVP
         Vary \( \theta\) to change direction on section
         Linear interpolation to determine intersection on Poincar\'e section
+        \item Only one reachabile set computation is required
         }
 \end{frame} %--------------------------------------------------%
 
 \begin{frame}{Geostationary  transfer} %----------------------------------------------------%
     \begin{itemize}
-           \item Tranfer for geostationary orbit to a periodic orbit about \( L_1\)
+           \item Transfer from geostationary orbit to a \( L_1\) periodic orbit 
            \item Multiple iterations of reachable set required for transfer
     \end{itemize}
 
@@ -498,7 +499,7 @@
     \item Generate the reachability set through discretization of \( \phi_i \)
     \item Visualize \( \Sigma \in \R^4 \) through the use of two 2-D sections
     \pause
-    \item Control input allows for large deviation in velocity components
+    \item Control input allows for depature from natural dynamics
 \end{itemize}
 
 \begin{center}
@@ -527,7 +528,7 @@
 
 \begin{frame}{Complete transfer}
 \begin{itemize}
-    \item We can visualize the complete trajectory in both the body and inertial frames
+    \item We visualize the trajectory in body and inertial frames
 \end{itemize}
 
 \begin{center}
@@ -545,11 +546,11 @@
 
 % Results from 2016 ACC
 
-\begin{frame}{Spacecraft Orientation} %-----------------------------%
+\begin{frame}{Spacecraft Orientation}\label{slide:attitude_control} %-----------------------------%
 
 \begin{itemize}
 
-    \item \Emph{Attitude Representation}: rotation matrix from body to inertial frame
+    \item \Emph{Attitude Representation}: rotation matrix from body to inertial frame \hyperlink{slide:attitude_kinematics}{\beamergotobutton{Attitude Kinematics}}
      \[\SO =  \{R\in\R^{3\times 3}\,|\, R^TR=I,\;\mathrm{det}[R]=1\} . \]
     \item Rigid body attitude dynamics:
     \begin{gather*}
