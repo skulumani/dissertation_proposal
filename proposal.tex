@@ -1,9 +1,9 @@
-%\documentclass[11pt,professionalfonts,hyperref={pdftex,pdfpagemode=none,pdfstartview=FitH}]{beamer}
-%\usepackage{times}
 \documentclass[11pt,professionalfonts]{beamer}
 % \usefonttheme{serif}
 \usepackage{presentation_packages}
 \usepackage{tikz_packages}
+
+\tdplotsetmaincoords{60}{125} % view angle in spherical coordinates
 
 \addbibresource{library.bib}
 \ExecuteBibliographyOptions{
@@ -45,20 +45,11 @@
   \end{beamercolorbox}}%
   \vskip0pt%
 } \setbeamercolor{box}{fg=black,bg=yellow}
-
+\setbeamertemplate{navigation symbols}{}
 
 \title[Asteroid Trajectory Design]{\large\textbf{Coupled Asteroid Trajectory Design: From Orbit to Landing}}
 
 \author{Shankar Kulumani}
-
-%\institute{\footnotesize
-%{\normalsize Shankar Kulumani}\vspace*{0.2cm}\\
-%  Flight Dynamics and Control Lab \\ 
-%  Dept. of Mechanical and Aerospace Engineering\\ 
-%  The George Washington University \\
-%  Washington, DC\\ \vspace{10pt}
-%  June 4, 2014 \\ \vspace{10pt}
-%  }
    
 \institute{
   Ph.D. Candidate\\

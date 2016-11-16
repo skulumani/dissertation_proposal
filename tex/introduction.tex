@@ -1,28 +1,8 @@
 % !TEX Root = ../proposal.tex
 
-\section*{Introduction}
-\subsection*{Electric Propulsion}  
+\section[Introduction]{Introduction}
 
-\begin{frame} %-----------------------------%
-\frametitle{Low-thrust vehicles} % electric propulsion
-\begin{itemize}
-    \item Low-thrust orbital transfers offer increased mission oportunities
-    \begin{itemize}
-        \item Electric propulsion is increasing in capability
-        \item Offers much higher specific impulse than chemical engines 
-        \item Requires much longer operating periods for maneuvers 
-        \item Enables long duration missions with frequent thrusting
-    \end{itemize}
-\end{itemize}
-
-\begin{center}
-    \includegraphics[height=0.4\textheight,width=0.5\textwidth,keepaspectratio]{figures/2016AAS/patriot_plume.jpg}
-    ~
-    \includegraphics[height=0.4\textheight,width=0.5\textwidth,keepaspectratio]{figures/2016AAS/deepspace1.jpg}
-\end{center}
-\end{frame}   %-----------------------------%
-
-\subsection*{Asteroid Missions}
+\subsection[Asteroid Missions]{Asteroid Missions}
 
 \begin{frame}{Asteroid Missions}
 \begin{itemize}
@@ -32,9 +12,9 @@
 \end{itemize}    
 
 \begin{center}
-    \includegraphics[height=0.38\textheight,width=0.5\textwidth,keepaspectratio]{figures/2016AAS/near_mos_20001203_full.jpg}
+    \includegraphics[height=0.3\textheight,width=0.5\textwidth,keepaspectratio]{figures/2016AAS/near_mos_20001203_full.jpg}
     ~
-    \includegraphics[height=0.38\textheight,width=0.5\textwidth,keepaspectratio]{figures/2016AAS/Itokawa8_hayabusa_1210.jpg}
+    \includegraphics[height=0.3\textheight,width=0.5\textwidth,keepaspectratio]{figures/2016AAS/Itokawa8_hayabusa_1210.jpg}
 \end{center}
 \end{frame}
 
@@ -68,7 +48,29 @@
 
 \end{frame}
 
-\subsection*{Spacecraft Autonomy}
+\subsection[Electric Propulsion]{Electric Propulsion}  
+
+\begin{frame} \label{slide:lowthrust_vehicles}%-----------------------------%
+\frametitle{Low-thrust vehicles} % electric propulsion
+\begin{itemize}
+    \item Low-thrust orbital transfers offer increased mission oportunities
+    \begin{itemize}
+        \item Electric propulsion is increasing in capability
+        \item Offers much higher specific impulse than chemical engines 
+        \item Requires much longer operating periods for maneuvers 
+        \item Enables long duration missions with frequent thrusting
+    \end{itemize}
+\end{itemize}
+
+\begin{center}
+    \includegraphics[height=0.4\textheight,width=0.5\textwidth,keepaspectratio]{figures/2016AAS/patriot_plume.jpg}
+    ~
+    \includegraphics[height=0.4\textheight,width=0.5\textwidth,keepaspectratio]{figures/2016AAS/deepspace1.jpg}
+\end{center}
+\hyperlink{slide:propulsion}{\beamergotobutton{Ideal Rockets}}
+\end{frame}   %-----------------------------%
+
+\subsection[Spacecraft Autonomy]{Spacecraft Autonomy}
 % why study the coupled attitude/translational problem
 
 \begin{frame}[t]{Spacecraft Autonomy} %-----------------------------%
@@ -80,11 +82,14 @@
         \item Independently navigate hazards and handle possible failures
     \end{itemize}
 \end{itemize}
-\visible<2->{
+\visible<2>{
 \begin{center}
     \includegraphics[width=0.5\textwidth,height=0.35\textheight,keepaspectratio]{figures/2016ACC/hubble.jpg}\hfill
     \includegraphics[width=0.5\textwidth,height=0.4\textheight,keepaspectratio]{figures/osires_rex.png}
 \end{center}
+}
+\note[itemize]{
+    \item Autonomy is a key component to enable asteroid missions
 }
 \end{frame}   %-----------------------------%
 

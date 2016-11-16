@@ -1,7 +1,7 @@
 % !TEX Root = ../proposal.tex
 
-\section{Prior Research}
-\subsection{Reachability Set for Orbital Transfers}
+\section[Prior Research]{Research into spacecraft mission design}
+\subsection[Reachability Sets]{Orbital transfers via Reachability Sets}
 
 \begin{frame}{Orbital Transfers} % -----------------------------------%
     \begin{itemize}
@@ -21,16 +21,17 @@
     \end{itemize}
 
   \note[itemize]{
+    \item here we introduce some of our previous work that aims to apply geometric mechanics to the design of trajectories around asteroids
     \item Reachability set avoids the need to pick initial conditions
     \item We compute on a lower dimensional surface
   }
 \end{frame} %--------------------------------------%
 
-\subsubsection[]{Dynamic Systems Theory}
+\subsubsection[Dynamic Systems Theory Review]{Dynamic Systems}
 
 \begin{frame}{\Poincare map}
 \begin{itemize}
-    \item Intersection of a periodic orbit with a lower dimensional subspace,
+    \item Intersection of a periodic orbit with a lower dimensional subspace
     \pause
         \begin{itemize}
             \item  \Emph{\Poincare section} - discrete map between intersections
@@ -45,11 +46,59 @@
         \end{itemize}
 \end{itemize}
 
-\begin{align*}
-    \Sigma = \braces{\parenth{x, \dot{x}, z, \dot{z}} | y(t_f) = 0 }
-\end{align*}
+\begin{center}
+    \begin{scaletikzpicturetowidth}{0.3\textwidth}
+    \begin{tikzpicture}[tdplot_main_coords,
+          poincare/.style={opacity=.2,very thick,fill=blue},
+          orbit/.style={very thick,black},
+          orbit hidden/.style={very thick,dashed},
+          grid/.style={very thin,gray!50},
+          axis/.style={->,blue,thick},scale=0.6]
 
-{\LARGE Add image of \Poincare section}
+        % draw periodic orbit
+        \onslide<4->{
+            % draw a periodic orbit
+            \coordinate (center) at (0,0,2);
+            \node[above left] (x0) at (0,2,2) {\(\vecbf{x}_0\)};
+            \filldraw (0,2,2) circle (3pt);
+        }
+
+        \onslide<5->{
+            \tdplotdrawarc[orbit hidden]{(center)}{2}{90}{190}{}{};
+            \tdplotdrawarc[orbit,<-]{(center)}{2}{-170}{90}{}{};
+        }
+
+        \onslide<6->{
+            % nodes for the poincare section
+            \node[label=above:\(\Sigma\)] (upper_right) at (0,5,5) {};
+            \node[] (upper_left) at (0,1,5) {};
+            \node[] (lower_left) at (0,1,0) {};
+            \node[] (lower_right) at (0,5,0) {};
+
+            % draw poincare section
+            \draw[poincare] (upper_right.center) -- (upper_left.center) -- (lower_left.center) -- (lower_right.center) -- (upper_right.center);
+        }
+        
+        \onslide<7->{
+            \node[below right] (x1) at (0,3,2) {\(\vecbf{x}_1\)};
+            \filldraw (0,3,2) circle (3pt);
+        }
+
+        \onslide<8->{
+            \tdplotdrawarc[orbit hidden]{(center)}{3}{90}{199}{}{};
+            \tdplotdrawarc[orbit,<-]{(center)}{3}{-161}{90}{}{};
+        }
+    \end{tikzpicture}
+    \end{scaletikzpicturetowidth}
+\end{center}
+
+\note[itemize]{
+    \item Here we present a review of the key components of dynamical systems theory
+    \item we start with some initial condition \( \vecbf{x}_0\) on a periodic orbit
+    \item we then define a section \( \Sigma \) transverse to this flow
+    \item we can use the successive iterations of these periodic orbits to study the dynamics of the system on a lower dimensional surface.
+    \item Periodic orbits show up as fixed points while sinks/sources will have a distinctly different behavior
+}
 \end{frame}
 
 \begin{frame}{Reachability Set}
@@ -66,55 +115,102 @@
     \item Extend to the design of orbital transfers
 \end{itemize}
 
+\note[itemize]{
+    \item Given the state of an aircraft, we can predict where it can end up over a fixed amount of time.
+    \item To avoid any possibility of collision, we want to make sure these sets do not intersect
+}
 \end{frame}
 
 \begin{frame}{Reachability Set on \Poincare section} % -----------------------------------%
 
 \begin{itemize}
-    \item Generate the reachability set on a \Poincare section
-    \[
-        \Sigma = \braces{\parenth{x, \dot{x}, z, \dot{z}} | y(t_f) = 0 }
-    \]
+    \item Generate the reachability set on a \Poincare section, \( \Sigma \)
     \item Control input is chosen to enlarge the reachable set
 \end{itemize}
-\pause
+
 \begin{center}
-    \begin{scaletikzpicturetowidth}{0.4\textwidth}
-    \begin{tikzpicture}[scale=\tikzscale]
-        \coordinate [label=left:\textcolor{black}{\large \(\vecbf{x}_0\)}] (x0) at (-1,-2);
-        \coordinate [label=below:\textcolor{black}{\large  \(\vecbf{x}_n\)}] (xn) at (1,1);
-        \coordinate [label=left:\textcolor{black}{\large  \(\Sigma\)}] (sigma) at (-4,3);
-        %\coordinate [label=below:\textcolor{black}{\large  \(P(\vec{x})\)}] (P) at (0,-3.5);
-        % define the path of the flow with coordinates
-        \coordinate [label=right:\textcolor{black}{}] (f1) at (5,-2);
-        \coordinate [label=below:\textcolor{black}{\large  \(\psi(t,\vecbf{x}_0)\)}] (f2) at (2,-5);
-        \coordinate [label=right:\textcolor{black}{}] (f3) at (-4,-4);
-        \coordinate [label=right:\textcolor{black}{}] (f4) at (-4,-1);
+    \begin{tikzpicture}[tdplot_main_coords,
+      poincare/.style={opacity=.2,very thick,fill=blue},
+      orbit/.style={very thick,black},
+      orbit hidden/.style={very thick,dashed},
+      grid/.style={very thin,black},
+      axis/.style={->,blue,thick},
+      reachability/.style={thick,blue}]
+
+    % draw axes
+    % \draw[axis] (0,0,0) -- (5,0,0) node[anchor=west]{$x$};
+ %    \draw[axis] (0,0,0) -- (0,5,0) node[anchor=west]{$y$};
+ %    \draw[axis] (0,0,0) -- (0,0,5) node[anchor=west]{$z$};
+
+    % nodes for the poincare section
+    \node[] (upper_right) at (0,5,5) {};
+    \node[] (upper_left) at (0,1,5) {};
+    \node[] (lower_left) at (0,1,0) {};
+    \node[] (lower_right) at (0,5,0) {};
+
+    \onslide<2->{
+        % draw poincare section
+        \draw[poincare] (upper_right.center) -- (upper_left.center) -- (lower_left.center) -- (lower_right.center) -- (upper_right.center);
+        \node[label=above:\(\Sigma\)] at (upper_right) {};
+        }
+
+    % draw a periodic orbit
+    \coordinate (center) at (0,0,2);
+    \node[] (x0) at (0,3,2) {};
+    \onslide<3>{
+        \node[label=left:\(\vecbf{x}_0\)] at (x0) {};
         
-    %   \draw[help lines] (-10,-10) grid (10,10); %grid
-        \filldraw [black] (x0) circle [radius=3pt];
-        \filldraw [black] (xn) circle [radius=3pt];
+    }
+    \onslide<4->{
+        \filldraw (x0) circle (3pt);
+        \node[label=below:\(\vecbf{x}_n\)] at (x0) {};
+    }
+
+    \onslide<4-5>{
+        \tdplotdrawarc[orbit hidden]{(center)}{3}{90}{200}{}{};
+        \tdplotdrawarc[orbit,<-]{(center)}{3}{-160}{90}{}{};
+        }
+
+    \coordinate (reach) at (0,4.5,2);
+    \tdplotsetthetaplanecoords{90}
+
+    % draw poincare angles
+    \onslide<5->{
+        \draw[tdplot_rotated_coords,grid] (x0) -- (reach);
+        \draw[tdplot_rotated_coords,grid] (x0) -- ++(-45:1.5);
+        \tdplotdrawarc[tdplot_rotated_coords,grid]{(x0)}{0.5}{-45}{90}{above}{\(\phi\)};
+        }
+
+
+   % draw terminal state on reachability set
+    \onslide<6->{
+        \node[tdplot_rotated_coords,label=above:\(\vecbf{x}_f\)] (xf) at ($ (x0)+(-45:1.5) $) {};
+        \filldraw (xf) circle (3pt);
+        }
+
+    \onslide<7->{
+        \node[tdplot_rotated_coords,label=below:\(J\)] at (xf) {};
+        }
+
+    \onslide<8->{
+        \tdplotdrawarc[tdplot_rotated_coords,reachability]{(x0)}{1.5}{0}{360}{}{};
+    }
     
-        \draw [ultra thick,black,->-](x0) to[out=20,in=90,distance=2cm] (f1) to[out=-90,in=0,distance=2cm] (f2) to[out=180,in=-45,distance=2cm] (f3) to[out=135,in=-135,distance=2cm] (f4) ;
-        \draw [ultra thick, black,dashed,->] (f4) to[out=45,in=180,distance=1cm] ($(xn)-(2,0)$);
-        
-        \draw [ultra thick] plot [smooth cycle, tension=0.1, rotate=5] coordinates { (-4,-3) (4,-3) (4,3) (-4,3) };
-    
-        \draw [thick,dashed] (xn) circle [radius=2cm]; % reachability set
-    
-        \draw [thick,->] (xn) -- ($(xn) + (2.5,0)$);
-        \draw [thick,rotate=45,->] (xn) -- ($(xn) + (2.5,0)$);
-        \draw ($(xn) + (1,0)$) arc [start angle=0,end angle=45, radius=1];
-        \node [draw=none] at (2.8,1.5) {\large \(\phi_d\)};
-        \draw [decorate,decoration={brace,amplitude=5pt},rotate=45] (xn) -- ($(xn) + (2,0)$);
-        \node [draw=none] at ($ (xn) + (0,1) $) {\large \( J \)};
-    \end{tikzpicture}
-    \end{scaletikzpicturetowidth}
+\end{tikzpicture}
 \end{center}
 
+\note[itemize]{
+    \item We combine both reachability and the \Poincare section to design transfers
+    \item again we define our section \( \Sigma\)
+    \item choose an initial state that is on \( \Sigma \)
+    \item propogate without any control input from \( \vecbf{x}_0 \) to \( \vecbf{x}_n\)
+    \item by adding the control input the terminal state will be something different at \( \vecbf{x}_f\)
+    \item we define the distance between \( \vecbf{x}_n\) and \(\vecbf{x}_f\) with \( J \) - want to maximize this
+    \item Repeat this computation many times for a variety of angles \( \phi\)
+}
 \end{frame} %--------------------------------------%
 
-\subsection[]{Optimal Control Problem}
+\subsection[Formulating the optimal control problem]{Optimal Control Problem}
 
 \begin{frame}{Optimal Control Problem}
 \begin{itemize}
@@ -126,7 +222,7 @@
         \]
     
     \pause
-    \item Terminal constraints - \( \vecbf{m}_i(\vecbf{x}_f) = 0\) ensures intersection with \( \Sigma \)
+    \item Terminal constraints - \( \vecbf{m}_i(\vecbf{x}_f) = 0\) ensures \( \Sigma \) intersection
     \pause
     \item Control constraint used to emulate realistic system
         \[
@@ -134,41 +230,57 @@
         \]
 \end{itemize}
 
+\note[itemize]{
+    \item Formulate the reachability in terms of an optimal control problem
+}
 \end{frame}
 
 \begin{frame}{Shooting Method}
 \begin{itemize}
-    \item Multiple Shooting used to deal with convergence issues
+    \item Shooting method used to solve boundary value problem
+    \item Convergence is difficult with with single shooting
+    \item<6-> Multiple shooting sub-divides the total interval
 \end{itemize}
 
-\only<1>{
+\only<2-5>{
 \begin{scaletikzpicturetowidth}{\textwidth}
     \begin{tikzpicture}[scale=\tikzscale]
-        % \draw[help lines] (0,0) grid (20,5) ; %grid
+        \onslide<2->{
+            \node[label=west:\(\vecbf{x}\)] (x0m) at (0,5) {};
+            \node[] (xnm) at (20,5) {};
+    
+            \node[label=below:\(t_0\)] (t0) at (0,0) {};
+            \node[label=below:\(t_f\)] (tf) at (20,0) {};
 
-        \node[label=west:\(\vecbf{x}\)] (x0m) at (0,5) {};
-        \node[] (xnm) at (20,5) {};
+            \draw [<->,thick] (tf.center) -- (t0.center) -- (x0m.center);
 
-        \node[label=below:\(t_0\)] (t0) at (0,0) {};
-        \node[label=below:\(t_f\)] (tf) at (20,0) {};
+            % nodes for each subsegment
+            \node[label=left:\(\vecbf{x}_0\)] (x0) at (0,1) {\pgfuseplotmark{*}};
+            \node[label=below left:\(\vecbf{\lambda}_0\)] at (x0) {};
+            \node[label=right:\(\vecbf{x}_f\)] (xnminus) at (20,3) {\pgfuseplotmark{*}};
+            \node[label=below right:\(\vecbf{\lambda}_f\)] at (xnminus) {};
+        }
 
-        % nodes for each subsegment
-        \node[label=left:\(\vecbf{x}_0\)] (x0) at (0,1) {\pgfuseplotmark{*}};
-        \node[label=right:\(\vecbf{x}_n\)] (xnminus) at (20,3) {\pgfuseplotmark{*}};
-        % draw axes
-        \draw [<->,thick] (tf.center) -- (t0.center) -- (x0m.center);
 
-        % draw the subsegments
-        \draw [->] (x0.center) to [bend left=20] (xnminus.center);
-
+        % shooting attempts
+        \onslide<3->{
+            \draw [->,dashed] (x0.center) to [bend left=20] ($ (xnminus.center)+(0,1) $);
+        }
+        \onslide<4->{
+            \draw [->,dashed] (x0.center) to [bend right=10] ($ (xnminus.center)+(0,-1) $);
+        }
+        % final correct shooting path
+        \onslide<5->{
+            \draw [->] (x0.center) to [bend left=10] (xnminus.center);
+        }
     \end{tikzpicture}
 \end{scaletikzpicturetowidth}
 }
-\only<2>{
-    \begin{scaletikzpicturetowidth}{\textwidth}
+
+\only<6->{
+\begin{scaletikzpicturetowidth}{\textwidth}
         \begin{tikzpicture}[scale=\tikzscale]
     % \draw[help lines] (0,0) grid (20,5) ; %grid
-
     \node[label=west:\(\vecbf{x}\)] (x0m) at (0,5) {};
     \node[] (x1m) at (5,5) {};
     \node[] (x2m) at (10,5) {};
@@ -176,44 +288,72 @@
     \node[] (xnm) at (20,5) {};
 
     \node[label=below:\(t_0\)] (t0) at (0,0) {};
-    \node[label=below:\(t_1\)] (t1) at (5,0) {};
-    \node[label=below:\(t_2\)] (t2) at (10,0) {};
-    \node[label=below:\(t_{n-1}\)] (t3) at (15,0) {};
     \node[label=below:\(t_n\)] (tn) at (20,0) {};
 
     % nodes for each subsegment
     \node[label=left:\(\vecbf{x}_0\)] (x0) at (0,1) {\pgfuseplotmark{*}};
-
-    \node[label=right:\(\vecbf{x}_1^{-}\)] (x1minus) at (5,2) {\pgfuseplotmark{*}};
-    \node[label={135:\(\vecbf{x}_1^{+}\)}] (x1plus) at (5,3) {\pgfuseplotmark{o}};
-
-    \node[label=right:\(\vecbf{x}_2^{-}\)] (x2minus) at (10,2) {\pgfuseplotmark{*}};
-    \node[label={135:\(\vecbf{x}_2^{+}\)}] (x2plus) at (10,3) {\pgfuseplotmark{o}};
-
-    \node[label=right:\(\vecbf{x}_{n-1}^{-}\)] (x3minus) at (15,2) {\pgfuseplotmark{*}};
-    \node[label={135:\(\vecbf{x}_{n-1}^{+}\)}] (x3plus) at (15,3) {\pgfuseplotmark{o}};
+    \node[label=below left:\(\vecbf{\lambda}_0\)] at (x0) {};
 
     \node[label=right:\(\vecbf{x}_n\)] (xnminus) at (20,3) {\pgfuseplotmark{*}};
+    \node[label=below right:\(\vecbf{\lambda}_n\)] at (xnminus) {};
+
     % draw axes
     \draw [<->,thick] (tn.center) -- (t0.center) -- (x0m.center);
 
-    % draw segement dividers
-    \draw [dashed,thick] (t1.center) -- (x1m.center);
-    \draw [dashed,thick] (t2.center) -- (x2m.center);
-    \draw [dashed,thick] (t3.center) -- (x3m.center);
-    \draw [dashed,thick] (tn.center) -- (xnm.center);
 
-    % draw markers at each subsegment
+    \onslide<7->{
+        
+        \node[label=below:\(t_1\)] (t1) at (5,0) {};
+        \node[label=below:\(t_2\)] (t2) at (10,0) {};
+        \node[label=below:\(t_{n-1}\)] (t3) at (15,0) {};
+        
+                \node[label=right:\(\vecbf{x}_1^{-}\)] (x1minus) at (5,2) {\pgfuseplotmark{*}};
+        \node[label={135:\(\vecbf{x}_1^{+}\)}] (x1plus) at (5,3) {\pgfuseplotmark{o}};
 
-    % draw the subsegments
-    \draw [->] (x0.center) to [bend left=30] (x1minus.center);
-    \draw [->] (x1plus.center) to [bend left=30] (x2minus.center);
-    % dotted lines here
-    \draw[decorate sep={2mm}{10mm},fill] (x2plus.east) to [bend left=30] (x3minus.west);
+                \node[label=right:\(\vecbf{x}_2^{-}\)] (x2minus) at (10,2) {\pgfuseplotmark{*}};
+        \node[label={135:\(\vecbf{x}_2^{+}\)}] (x2plus) at (10,3) {\pgfuseplotmark{o}};
 
-    \draw [->] (x3plus.center) to [bend left=30] (xnminus.center);
+                \node[label=right:\(\vecbf{x}_{n-1}^{-}\)] (x3minus) at (15,2) {\pgfuseplotmark{*}};
+        \node[label={135:\(\vecbf{x}_{n-1}^{+}\)}] (x3plus) at (15,3) {\pgfuseplotmark{o}};
+        % draw segement dividers
+        \draw [dashed,thick] (t1.center) -- (x1m.center);
+        \draw [dashed,thick] (t2.center) -- (x2m.center);
+        \draw [dashed,thick] (t3.center) -- (x3m.center);
+        \draw [dashed,thick] (tn.center) -- (xnm.center);
+    }
+
+    \onslide<8->{
+
+        \draw [->] (x0.center) to [bend left=30] (x1minus.center);
+    }
+
+    \onslide<9->{
+
+        \draw [->] (x1plus.center) to [bend left=30] (x2minus.center);
+    }
+
+    \onslide<10->{
+        % dotted lines here
+
+        \draw[decorate sep={2mm}{10mm},fill] (x2plus.east) to [bend left=30] (x3minus.west);
+    }
+
+    \onslide<11->{
+
+        \draw [->] (x3plus.center) to [bend left=30] (xnminus.center);
+    }
+
+
 \end{tikzpicture}
-    \end{scaletikzpicturetowidth}
+\end{scaletikzpicturetowidth}
+}
+\note[itemize]{
+    \item The euler lagrange equations transforms from an optimal control problem to a two point boundary value problem
+    \item in the shooting method we try to choose initial conditions \( \vecbf{\lambda}_0\) to satisfy some set of terminal conditions
+    \item Again it's prone to sensitivty so we instead use a multiple shooting method 
+    \item We divide the time interval into smaller sub segments and add additional interior constraints to ensure a continuous trajectory
+    \item Each sub stage is then a smaller single shooting approach
+    \item this ends up reducing the sensitivity of the terminal states to variations of the intial conditions
 }
 \end{frame}
 
@@ -237,7 +377,7 @@
 \end{frame}
 
 % results from 2015 AAS
-\subsection[]{Transfer Examples}
+\subsection[Transfer examples using Reachability Sets]{Transfer Examples}
 
 \begin{frame}[t]{Orbital Transfers via Reachability Sets}
     \begin{itemize}
@@ -254,9 +394,13 @@
             \item Both defined in a rotating reference frame
         \end{itemize}
     \end{itemize}
+
+\note[itemize]{
+    \item here we show some examples of using this approach to design transfers in two different dynamic enviornments
+}
 \end{frame}
 
-\subsubsection[]{Three Body Problem}
+\subsubsection[Circular Restricted Three Body Problem]{Three Body Problem}
 
 \begin{frame}%--------------------------------------------%
 \frametitle{Three Body Problem}
@@ -271,7 +415,8 @@
         }
     
     \note[itemize]{
-        \item Introduce problem
+        \item Introduce problem and initial and terminal orbits. 
+        \item Earth is way off to the left with the Moon at the center
         \item Possible use as a communication array
         \item Might actually be a distant retrograde orbit
         }
@@ -301,12 +446,13 @@
         \item Multiple shooting to solve TPBVP
         Vary \( \theta\) to change direction on section
         Linear interpolation to determine intersection on Poincar\'e section
+        \item Only one reachabile set computation is required
         }
 \end{frame} %--------------------------------------------------%
 
 \begin{frame}{Geostationary  transfer} %----------------------------------------------------%
     \begin{itemize}
-           \item Tranfer for geostationary orbit to a periodic orbit about \( L_1\)
+           \item Transfer from geostationary orbit to a \( L_1\) periodic orbit 
            \item Multiple iterations of reachable set required for transfer
     \end{itemize}
 
@@ -322,9 +468,12 @@
        }
     \end{center}
 
+\note[itemize]{
+    \item The green trajectories are the invariant manifolds and require no control input to traverse large regions of the phase space
+}
 \end{frame} %--------------------------------------------%
 
-\subsubsection[]{Asteroid transfers}
+\subsubsection[Transfers about 4769 Castalia]{Asteroid transfers}
 
 % Results from 2016 AAS
 \begin{frame}{Transfer Objective} %-----------------------------%
@@ -339,6 +488,9 @@
     \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2016AAS/initial_transfer_3d.pdf}
 \end{center}
 
+\note[itemize]{
+    \item Now we apply the same methodology to transfers about asteroids
+}
 \end{frame}%-----------------------------%
 
 \begin{frame}{Simulation}
@@ -347,7 +499,7 @@
     \item Generate the reachability set through discretization of \( \phi_i \)
     \item Visualize \( \Sigma \in \R^4 \) through the use of two 2-D sections
     \pause
-    \item Control input allows for large deviation in velocity components
+    \item Control input allows for depature from natural dynamics
 \end{itemize}
 
 \begin{center}
@@ -355,6 +507,10 @@
     \includegraphics[width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{figures/2016AAS/poincare_zvszdot.pdf}
 \end{center}
 
+\note[itemize]{
+    \item This \( \Sigma \) is different than before because we're no longer dealing with a planar orbit
+    \item We visualize \( \R^4\) using two two-dimensional plots
+}
 \end{frame}
 
 \begin{frame}{Transfer Simulation}
@@ -372,26 +528,29 @@
 
 \begin{frame}{Complete transfer}
 \begin{itemize}
-    \item We can visualize the complete trajectory in both the body and inertial frames
+    \item We visualize the trajectory in body and inertial frames
 \end{itemize}
 
 \begin{center}
-  \animategraphics[draft,autoplay,loop,width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{30}{animation/2016AAS/body/IMG}{00001}{01499}~\hfill
-  \animategraphics[draft,autoplay,loop,width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{30}{animation/2016AAS/inertial/IMG}{00001}{01499}
+  \animategraphics[controls,autoplay,loop,width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{60}{animation/2016AAS/body/IMG}{00500}{01499}~\hfill
+  \animategraphics[controls,autoplay,loop,width=0.5\textwidth,height=0.7\textheight,keepaspectratio]{60}{animation/2016AAS/inertial/IMG}{00500}{01499}
 \end{center}
 
+\note[itemize]{
+    \item we have the body frame on the left and the inertial frame on the right
+}
 \end{frame}
 
-\subsection{Constrained Attitude Control}
+\subsection[Autonomous Spacecraft attitude control with obstacles]{Constrained Attitude Control}
 
 
 % Results from 2016 ACC
 
-\begin{frame}{Spacecraft Orientation} %-----------------------------%
+\begin{frame}{Spacecraft Orientation}\label{slide:attitude_control} %-----------------------------%
 
 \begin{itemize}
 
-    \item \Emph{Attitude Representation}: rotation matrix from body to inertial frame
+    \item \Emph{Attitude Representation}: rotation matrix from body to inertial frame \hyperlink{slide:attitude_kinematics}{\beamergotobutton{Attitude Kinematics}}
      \[\SO =  \{R\in\R^{3\times 3}\,|\, R^TR=I,\;\mathrm{det}[R]=1\} . \]
     \item Rigid body attitude dynamics:
     \begin{gather*}
@@ -407,6 +566,10 @@
     \item Hard cone constraint: \( r^T R^T v \leq \cos \theta \)
     
 \end{itemize}
+
+\note[itemize]{
+    \item Obstacle described as a cone around the direction of avoidance
+}
 \end{frame}   %-----------------------------%
 
 \begin{frame}{Control Objective} %---------------------------------------%
@@ -452,7 +615,7 @@
         A(R,R_d) = \frac{1}{2} \tr{G \left( I - R_d^T R\right)} .
     \end{align*}
     \begin{center} 
-        \includegraphics[draft,height=0.6\textheight]{figures/2016ACC/attract_error.pdf}
+        \includegraphics[height=0.6\textheight]{figures/2016ACC/attract_error.pdf}
     \end{center}
 }
 
@@ -480,6 +643,10 @@
         \includegraphics[height=0.6\textheight]{figures/2016ACC/combined_error.pdf}
     \end{center}
 }
+
+\note[itemize]{
+    \item First step in control design is the selection of an error function
+}
 \end{frame}   %-----------------------------%
 
 \begin{frame}{Numerical Simulation} %-----------------------------%
@@ -490,8 +657,8 @@
 \end{itemize}
 
 \begin{center}
-    \animategraphics[draft,autoplay,loop,width=0.5\textwidth]{8}{animation/2016ACC/single_noavoid/single_noavoid-}{0}{99}~
-    \animategraphics[draft,autoplay,loop,width=0.5\textwidth]{8}{animation/2016ACC/single_avoid/single_avoid-}{0}{99}
+    \animategraphics[controls,autoplay,loop,width=0.5\textwidth]{8}{animation/2016ACC/single_noavoid/single_noavoid-}{0}{99}~
+    \animategraphics[controls,autoplay,loop,width=0.5\textwidth]{8}{animation/2016ACC/single_avoid/single_avoid-}{0}{99}
 \end{center}
 
 \end{frame}%-----------------------------%
@@ -506,12 +673,12 @@
 \end{itemize}
 
 \begin{center}
-    \animategraphics[draft,autoplay,loop,width=0.5\textwidth]{8}{animation/2016ACC/multiple_avoid/multiple_avoid-}{0}{99}
+    \animategraphics[controls,autoplay,loop,width=0.5\textwidth,height=0.5\textheight,keepaspectratio]{8}{animation/2016ACC/multiple_avoid/multiple_avoid-}{0}{99}
 \end{center}
 
 \end{frame}%---------------------------------------%
 
-\subsubsection[]{Hardware Implementation}
+\subsubsection[Quadrotor attitude control]{Hardware Implementation}
 
 \begin{frame}{Hexrotor Experiment} %-----------------------------%
 \begin{itemize}

@@ -11,7 +11,7 @@
 \begin{block}{Newton's Law of Universal Gravitation}
     Any two bodies attract one another with a force proportional to the product of their masses and invesely proportional to the square of the distance between them
     \[
-    F = - \frac{G m_1 m_2}{ r^2} \frac{\bar{r}}{r}
+    \vecbf{F} = - \frac{G m_1 m_2}{ r^2} \frac{\vecbf{r}}{r}
     \]
 \end{block}
 }
@@ -19,19 +19,19 @@
 \begin{block}{N-Body}
     Gravitational attraction of \( n \) bodies acting on the particle of interest \( m_i \)
     \[
-    m_i \ddot{\bar{r}}_i = -G \sum_{\substack{j = 1\\j\neq i}}^n \frac{m_i m_j}{r_{ji}^3} \bar{r}_{ji}
+    m_i \ddot{\vecbf{r}}_i = -G \sum_{\substack{j = 1\\j\neq i}}^n \frac{m_i m_j}{r_{ji}^3} \vecbf{r}_{ji}
     \]
     Motion of \( \bar{r}_j (t) \) is not known - Not solvable in general
     
 \end{block}
 }
-
+\hyperlink{slide:system_model_challenges}{\beamergotobutton{Dynamic Challenges}}
 \end{frame} %--------------------------------------------------------------%
 
 \begin{frame}[noframenumbering,label=centrobaric]
 \frametitle{Gravitational Modeling}
 \begin{block}{Centrobaric Body}
-    \( F = -\frac{G m_1 m_2}{R^2} \hat{a}_1 \) for all particles outside of body
+    \( \vecbf{F} = -\frac{G m_1 m_2}{R^2} \vecbf{a}_1 \) for all particles outside of body
 \end{block}
 
 \begin{columns}
@@ -75,8 +75,8 @@
 }
 \only<3>{
 \begin{center}
-  \animategraphics[draft,autoplay,loop,width=0.5\textwidth]{30}{animation/2016AAS/castalia/IMG}{00001}{00999}~\hfill
-  \includegraphics[draft,width=0.5\textwidth]{figures/2016AAS/radius_contour.pdf}
+  \animategraphics[controls,autoplay,loop,width=0.5\textwidth]{30}{animation/2016AAS/castalia/IMG}{00001}{00999}~\hfill
+  \includegraphics[width=0.5\textwidth]{figures/2016AAS/radius_contour.pdf}
 \end{center}
 }
 
@@ -100,7 +100,7 @@
 \begin{block}{Relative Motion}
 Really care about relative motion of \( m_i \) wrt \( m_q \)
 \[
-    \ddot{\bar{r}}_{qi} + G \frac{m_i + m_q}{r_{qi}^3} \bar{r}_{qi} = G \sum_{\substack{j = 1\\j\neq i,q}}^n m_j \parenth{ \frac{\bar{r}_{ij}}{r_{ij}^3} - \frac{\bar{r}_{qj}}{r_{qj}^3}} \bar{r}_{ji}
+    \ddot{\vecbf{r}}_{qi} + G \frac{m_i + m_q}{r_{qi}^3} \vecbf{r}_{qi} = G \sum_{\substack{j = 1\\j\neq i,q}}^n m_j \parenth{ \frac{\vecbf{r}_{ij}}{r_{ij}^3} - \frac{\vecbf{r}_{qj}}{r_{qj}^3}} \vecbf{r}_{ji}
 \]
 \end{block}
 }
@@ -114,7 +114,7 @@ Really care about relative motion of \( m_i \) wrt \( m_q \)
 \only<1>{
 \begin{block}{Force due to gravity on body \( B\) from particle \( P \)}
 \begin{equation*}
-    F = -G m_P \int_{\mathcal{B}} \bar{r} \parenth{r^2}^{-\frac{3}{2}} \, d m
+    \vecbf{F} = -G m_P \int_{\mathcal{B}} \vecbf{r} \parenth{r^2}^{-\frac{3}{2}} \, d m
 \end{equation*}
 \end{block}
 }
@@ -122,15 +122,15 @@ Really care about relative motion of \( m_i \) wrt \( m_q \)
 \begin{block}{Binomial Expansion}
 
 \begin{align*}
-    F &= - \frac{G m_P m_B}{R^2} \parenth{\hat{a}_1 + \sum_{i=2}^\infty \bar{f}^{(i)}} \\
-    \bar{f}^{(2)} &= \frac{1}{m_B R^2} \braces{\frac{3}{2} \bracket{ \tr{J_B} - 5 \hat{a}_1 \cdot J_B \cdot \hat{a}_1} \hat{a}_1 + 3 J_B \cdot \hat{a}_1}
+    \vecbf{F} &= - \frac{G m_P m_B}{R^2} \parenth{\vecbf{a}_1 + \sum_{i=2}^\infty \vecbf{f}^{(i)}} \\
+    \vecbf{f}^{(2)} &= \frac{1}{m_B R^2} \braces{\frac{3}{2} \bracket{ \tr{J_B} - 5 \vecbf{a}_1 \cdot J_B \cdot \vecbf{a}_1} \vecbf{a}_1 + 3 J_B \cdot \vecbf{a}_1}
 \end{align*}
 \end{block}
 }
 \only<3>{
 \begin{block}{Gravity Moment}
 \begin{equation*}
-    M = \frac{3 G m_B}{R^3} \hat{a}_1 \times J \cdot \hat{a}_1 + \frac{G m_B m_P}{R} \sum_{i=3}^\infty \hat{a}_1 \times \bar{f}^{(i)}
+    \vecbf{M} = \frac{3 G m_B}{R^3} \vecbf{a}_1 \times J \cdot \vecbf{a}_1 + \frac{G m_B m_P}{R} \sum_{i=3}^\infty \vecbf{a}_1 \times \vecbf{f}^{(i)}
 \end{equation*}
 %\begin{center}
 %CG \( \neq \) CM 
@@ -146,7 +146,7 @@ Really care about relative motion of \( m_i \) wrt \( m_q \)
 \begin{block}{Constant Area Approximation}
 Momentum transfer from solar photons striking spacecraft
 \begin{align*}
-    a_{SRP} = - \frac{\parenth{1 + \rho} P_0 A_{S}}{M_S} \frac{d - r}{\norm{d-r}^3}
+    \vecbf{a}_{SRP} = - \frac{\parenth{1 + \rho} P_0 A_{S}}{M_S} \frac{\vecbf{d} - \vecbf{r}}{\norm{\vecbf{d}-\vecbf{r}}^3}
 \end{align*}
 
 \( P_0\) is a solar flux constant \SI{1e8}{\kilogram\kilo\meter\cubed\per\second\squared\per\meter\squared}
@@ -155,7 +155,7 @@ Momentum transfer from solar photons striking spacecraft
 
 \( \rho \) is total reflectance or albedo of body
 
-\( d, r \) defined in small body frame to Sun and S/C respectively
+\( \vecbf{d}, \vecbf{r} \) defined in small body frame to Sun and S/C respectively
 \end{block}
 \begin{itemize}
     \item Large bodies, i.e. 433 Eros, SRP may be neglected
@@ -168,7 +168,7 @@ Momentum transfer from solar photons striking spacecraft
 \begin{frame}[noframenumbering]{Lagrange's Equations}%---------------------------------------------%
 \label{slide:lagrange}
 \begin{block}{Conservative System}
-  All applied forces \( F_i \) are derivable from a potential function \( V(x_1, x_2, \ldots, x_{3N}) \) : \(F_i = -\deriv{V}{x_i}\)
+  All applied forces \( \vecbf{F}_i \) are derivable from a potential function \( V(x_1, x_2, \ldots, x_{3N}) \) : \(\vecbf{F}_i = -\deriv{V}{\vecbf{x}_i}\)
 \end{block}
 
 \only<1>{
@@ -317,11 +317,11 @@ Momentum transfer from solar photons striking spacecraft
     \end{block}
 \end{frame} %----------------------------------------------------------------------%
 
-\begin{frame}[noframenumbering]{Spacecraft Propulsion}%------------------------------------------------%
+\begin{frame}[noframenumbering]{Spacecraft Propulsion}\label{slide:propulsion}%------------------------------------------------%
 \begin{block}{Ideal Rocket Equation}
     Amount of propellant required for a given velocity change
     \[
-        \Delta V = - v_e \ln\parenth{\frac{m_f}{m_i}}
+        \Delta V = - g_0 I_{sp} \ln\parenth{\frac{m_f}{m_i}}
     \]
 \end{block}
 
@@ -329,6 +329,8 @@ Momentum transfer from solar photons striking spacecraft
     \item High exhaust speeds make electric propulsion attractive
     \item Much higher efficiency than chemical propulsion
 \end{itemize}
+\hyperlink{slide:lowthrust_vehicles}{\beamergotobutton{Low-Thrust Vehicles}}
+
 \end{frame} %----------------------------------------------------------------%
 
 % Differences when considering an asteroid - polyhedron model
@@ -361,6 +363,12 @@ Momentum transfer from solar photons striking spacecraft
     \end{itemize}
 \end{column}
 \end{columns}
+\pause
+\begin{block}{Minimal Representations}
+    All minimal attitude representations have kinematic singularities and are not suitable for large rotations.
+\end{block}
+
+\hyperlink{slide:attitude_control}{\beamergotobutton{Attitude Control}}
 \end{frame}
 
 \begin{frame}[noframenumbering]{Attitude Parameterizations}
