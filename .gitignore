@@ -5,7 +5,7 @@
 *.sublime-workspace
 
 # don't track the output pdf for now
-proposal.pdf
+#proposal.pdf
 
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
@@ -227,7 +227,7 @@ TSWLatexianTemp*
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
 
 # Thumbnails
 ._*
